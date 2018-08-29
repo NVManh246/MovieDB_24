@@ -1,4 +1,4 @@
-package com.example.nvmanh.boxmovie;
+package com.framgia.nvmanh.boxmovie;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
