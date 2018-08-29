@@ -1,4 +1,4 @@
-package com.example.nvmanh.boxmovie;
+package com.framgia.nvmanh.boxmovie;
 
 import org.junit.Test;
 
