@@ -9,27 +9,27 @@ public class Movie {
     private int mId;
     @SerializedName("vote_average")
     private float mVote;
-    @SerializedName("original_title")
+    @SerializedName("title")
     private String mTitle;
     @SerializedName("poster_path")
     private String mPoster;
     @SerializedName("backdrop")
     private String mBackdrop;
     @SerializedName("genre_ids")
-    private List<Genres> mGenres;
+    private List<Integer> mGenreIds;
     @SerializedName("release_date")
     private String mReleaseDate;
     @SerializedName("overview")
     private String mOverview;
 
     public Movie(int id, float vote, String title, String poster, String backdrop,
-                 List<Genres> genres, String releaseDate, String overview) {
+                 List<Integer> genreIds, String releaseDate, String overview) {
         mId = id;
         mVote = vote;
         mTitle = title;
         mPoster = poster;
         mBackdrop = backdrop;
-        mGenres = genres;
+        mGenreIds = genreIds;
         mReleaseDate = releaseDate;
         mOverview = overview;
     }
@@ -66,14 +66,6 @@ public class Movie {
         mPoster = poster;
     }
 
-    public List<Genres> getGenres() {
-        return mGenres;
-    }
-
-    public void setGenres(List<Genres> genres) {
-        mGenres = genres;
-    }
-
     public String getReleaseDate() {
         return mReleaseDate;
     }
@@ -96,5 +88,20 @@ public class Movie {
 
     public void setBackdrop(String backdrop) {
         mBackdrop = backdrop;
+    }
+
+    public List<Integer> getGenreIds() {
+        return mGenreIds;
+    }
+
+    public void setGenreIds(List<Integer> genreIds) {
+        mGenreIds = genreIds;
+    }
+
+    public static final class Genres{
+        public static final String POPULAR = "popular";
+        public static final String TOP_RATED = "top_rated";
+        public static final String NOW_PLAYING = "now_playing";
+        public static final String UPCOMING = "upcoming";
     }
 }
