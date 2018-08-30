@@ -1,9 +1,9 @@
 package com.framgia.nvmanh.boxmovie.ultis;
 
 public final class StringUltis {
-    public static String getImageUrl(String s1, String s2){
-        StringBuilder stringBuilder = new StringBuilder(s1);
-        stringBuilder.append(s2);
+    public static String getImageUrl(String s){
+        StringBuilder stringBuilder = new StringBuilder(Contants.Server.BASE_IMAGE_URL);
+        stringBuilder.append(s);
         return stringBuilder.toString();
     }
 }

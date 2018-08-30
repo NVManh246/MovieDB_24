@@ -38,6 +38,6 @@ public abstract class BaseGenresActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        mViewModel.loadMovies(1);
+        mViewModel.start();
     }
 }
