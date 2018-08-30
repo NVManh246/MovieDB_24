@@ -6,7 +6,6 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.framgia.nvmanh.boxmovie.data.model.Movie;
-import com.framgia.nvmanh.boxmovie.ultis.Contants;
 import com.framgia.nvmanh.boxmovie.ultis.StringUltis;
 
 public class ItemMovieViewModel {
@@ -19,7 +18,7 @@ public class ItemMovieViewModel {
     @BindingAdapter({"imageUrl"})
     public static void loadImg(ImageView imageView, String url){
         Glide.with(imageView.getContext())
-                .load(StringUltis.getImageUrl(Contants.Server.BASE_IMAGE_URL, url))
+                .load(StringUltis.getImageUrl(url))
                 .into(imageView);
     }
 }
