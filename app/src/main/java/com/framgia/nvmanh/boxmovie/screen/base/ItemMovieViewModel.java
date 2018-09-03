@@ -14,11 +14,4 @@ public class ItemMovieViewModel {
     public void setMovie(Movie movie){
         observableMovie.set(movie);
     }
-
-    @BindingAdapter({"imageUrl"})
-    public static void loadImg(ImageView imageView, String url){
-        Glide.with(imageView.getContext())
-                .load(StringUltis.getImageUrl(url))
-                .into(imageView);
-    }
 }

@@ -4,4 +4,6 @@
     <color name="color_primary_dark">#303F9F</color>
     <color name="color_accent">#FF4081</color>
     <color name="color_ochre">#FF5722</color>
+    <color name="color_mine_shaft">#77000000</color>
+    <color name="color_cod_gray">#1A1A1A</color>
 </resources>

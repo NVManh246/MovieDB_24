@@ -1,5 +1,6 @@
 package com.framgia.nvmanh.boxmovie.screen.home;
 
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -9,8 +10,16 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.framgia.nvmanh.boxmovie.R;
+import com.framgia.nvmanh.boxmovie.data.api.ApiFactory;
+import com.framgia.nvmanh.boxmovie.data.api.BoxMovieApi;
+import com.framgia.nvmanh.boxmovie.data.source.MoviesRepository;
+import com.framgia.nvmanh.boxmovie.data.source.remote.MoviesRemoteDataSource;
+import com.framgia.nvmanh.boxmovie.databinding.FragmentHomeBinding;
+import com.framgia.nvmanh.boxmovie.ultis.schedulers.SchedulerProvider;
 
 public class HomeFragment extends Fragment {
+
+    private HomeViewModel mViewModel;
 
     public static HomeFragment newInstance() {
         HomeFragment fragment = new HomeFragment();
@@ -21,6 +30,17 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        FragmentHomeBinding binding = DataBindingUtil.inflate(
+                LayoutInflater.from(container.getContext()),
+                R.layout.fragment_home, container,
+                false);
+        BoxMovieApi api = ApiFactory.getApi();
+        SchedulerProvider schedulerProvider = SchedulerProvider.getInstance();
+        mViewModel = new HomeViewModel(
+                MoviesRepository.getInstace(MoviesRemoteDataSource.getInstance(api)),
+                schedulerProvider);
+        binding.setViewModel(mViewModel);
+        mViewModel.start();
+        return binding.getRoot();
     }
 }

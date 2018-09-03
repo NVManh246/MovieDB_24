@@ -26,4 +26,9 @@ public class MoviesRemoteDataSource implements MoviesDataSource.MoviesRemoteData
     public Observable<MovieResutls> getMovies(String genres, String apiKey, int page) {
         return mBoxMovieApi.getMovies(genres, apiKey, page);
     }
+
+    @Override
+    public Observable<MovieResutls> getTrendingMovies(String apiKey) {
+        return mBoxMovieApi.getTrendingMovies(apiKey);
+    }
 }

@@ -7,5 +7,6 @@ import io.reactivex.Observable;
 public interface MoviesDataSource {
     interface MoviesRemoteDataSource {
         Observable<MovieResutls> getMovies(String genres, String apiKey, int page);
+        Observable<MovieResutls> getTrendingMovies(String apiKey);
     }
 }
