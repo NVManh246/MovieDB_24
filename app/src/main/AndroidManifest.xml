@@ -18,5 +18,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".screen.popular.PopularActivity"/>
+        <activity android:name=".screen.toprate.TopRatedActivity"/>
+        <activity android:name=".screen.nowplaying.NowPlayingActivity"/>
+        <activity android:name=".screen.upcoming.UpComingActivity"/>
     </application>
 </manifest>

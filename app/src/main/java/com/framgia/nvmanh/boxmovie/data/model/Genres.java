@@ -20,4 +20,11 @@ public class Genres {
     public String getName() {
         return mName;
     }
+
+    public static final class Key {
+        public static final String POPULAR = "popular";
+        public static final String TOP_RATED = "top_rated";
+        public static final String NOW_PLAYING = "now_playing";
+        public static final String UPCOMING = "upcoming";
+    }
 }
