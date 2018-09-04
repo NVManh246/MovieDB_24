@@ -4,4 +4,11 @@
     <string name="category">Category</string>
     <string name="favorite">Favorite</string>
     <string name="error_connect">Connect error</string>
+    <string name="title_time">Time: </string>
+    <string name="title_imdb">IMDb: </string>
+    <string name="title_detail">Detail</string>
+    <string name="title_popular">Popular</string>
+    <string name="title_toprated">Top Rated</string>
+    <string name="title_now_playing">Now Playing</string>
+    <string name="title_coming">Coming</string>
 </resources>

@@ -13,4 +13,8 @@ public interface BoxMovieApi {
             @Path("type") String type,
             @Query("api_key") String apiKey,
             @Query("page") int page);
+
+    @GET("trending/movie/week")
+    Observable<MovieResutls> getTrendingMovies(@Query("api_key") String apiKey);
+
 }
