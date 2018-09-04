@@ -1,5 +1,6 @@
 package com.framgia.nvmanh.boxmovie.data.api;
 
+import com.framgia.nvmanh.boxmovie.data.model.MovieDetail;
 import com.framgia.nvmanh.boxmovie.data.model.MovieResutls;
 
 import io.reactivex.Observable;
@@ -17,4 +18,8 @@ public interface BoxMovieApi {
     @GET("trending/movie/week")
     Observable<MovieResutls> getTrendingMovies(@Query("api_key") String apiKey);
 
+    @GET("movie/{id}?append_to_response=casts%2Cvideos%2Creviews")
+    Observable<MovieDetail> getMovieDetail(
+            @Path("id") int id,
+            @Query("api_key") String apiKey);
 }
