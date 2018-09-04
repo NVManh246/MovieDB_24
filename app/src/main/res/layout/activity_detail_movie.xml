@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="android.view.View" />
+        <variable
+            name="viewModel"
+            type="com.framgia.nvmanh.boxmovie.screen.detail.MovieDetailViewModel"/>
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.Toolbar
+            android:layout_width="0dp"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:background="@color/color_tundora"
+            app:titleTextColor="@android:color/white"
+            app:title="@{viewModel.observableMovieDetail.title}"
+            />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="?attr/actionBarSize"
+            android:background="@color/color_cod_gray">
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/image_backdrop"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/dp_200"
+                    android:scaleType="centerCrop"
+                    app:imageUrl="@{viewModel.observableMovieDetail.backdropPath}"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <android.support.constraint.Guideline
+                    android:id="@+id/guide_line"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_begin="@dimen/dp_130" />
+
+                <ImageView
+                    android:id="@+id/image_poster"
+                    android:layout_width="@dimen/dp_120"
+                    android:layout_height="@dimen/dp_150"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_marginTop="@dimen/dp_30"
+                    android:scaleType="centerCrop"
+                    app:imageUrl="@{viewModel.observableMovieDetail.posterPath}"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/guide_line" />
+
+                <TextView
+                    android:id="@+id/text_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dp_10"
+                    android:text="@{viewModel.observableMovieDetail.title}"
+                    android:maxLines="2"
+                    android:textColor="@android:color/holo_red_light"
+                    android:textSize="@dimen/sp_16"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/image_poster"
+                    app:layout_constraintTop_toBottomOf="@+id/image_backdrop" />
+
+                <TextView
+                    android:id="@+id/text_title_release_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:text="@string/title_release_date"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold"
+                    app:layout_constraintLeft_toRightOf="@+id/image_poster"
+                    app:layout_constraintBottom_toTopOf="@+id/text_title_imdb"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:text="@{String.valueOf(viewModel.observableMovieDetail.releaseDate)}"
+                    android:textColor="@android:color/white"
+                    app:layout_constraintBottom_toTopOf="@+id/text_title_imdb"
+                    app:layout_constraintStart_toEndOf="@+id/text_title_release_date" />
+
+
+                <TextView
+                    android:id="@+id/text_title_imdb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:text="@string/title_imdb"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/text_title_time"
+                    app:layout_constraintLeft_toRightOf="@+id/image_poster" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:text="@{String.valueOf(viewModel.observableMovieDetail.vote)}"
+                    android:textColor="@android:color/holo_red_light"
+                    app:layout_constraintBottom_toTopOf="@+id/text_time"
+                    app:layout_constraintStart_toEndOf="@+id/text_title_imdb" />
+
+                <TextView
+                    android:id="@+id/text_title_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:text="@string/title_time"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/image_poster"
+                    app:layout_constraintLeft_toRightOf="@+id/image_poster" />
+
+                <TextView
+                    android:id="@+id/text_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:text="@{String.valueOf(viewModel.observableMovieDetail.runtime)}"
+                    android:textColor="@android:color/white"
+                    app:layout_constraintBottom_toBottomOf="@+id/image_poster"
+                    app:layout_constraintStart_toEndOf="@+id/text_title_time" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler_cast"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_marginRight="@dimen/dp_10"
+                    android:padding="@dimen/dp_10"
+                    android:background="@color/color_tundora"
+                    android:orientation="horizontal"
+                    app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_title_casts"
+                    app:setAdapter="@{viewModel.observableCastAdapter}"
+                    />
+
+                <TextView
+                    android:id="@+id/text_title_info"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    style="@style/StyleTitle"
+                    android:text="@string/title_overview"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/image_poster" />
+
+                <TextView
+                    android:id="@+id/text_overview"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_marginRight="@dimen/dp_10"
+                    android:paddingTop="@dimen/dp_10"
+                    android:paddingLeft="@dimen/dp_10"
+                    android:paddingRight="@dimen/dp_10"
+                    android:background="@color/color_tundora"
+                    android:ellipsize="end"
+                    android:maxLines="4"
+                    android:text="@{viewModel.observableMovieDetail.overview}"
+                    android:textColor="@android:color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_title_info" />
+
+                <TextView
+                    android:id="@+id/text_moreinfo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_marginRight="@dimen/dp_10"
+                    android:paddingTop="@dimen/dp_5"
+                    android:paddingBottom="@dimen/dp_10"
+                    android:background="@color/color_tundora"
+                    android:gravity="center"
+                    android:text="@string/title_view_more"
+                    android:textColor="@color/color_ochre"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_overview" />
+
+                <TextView
+                    android:id="@+id/text_title_trailer"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/title_trailer"
+                    style="@style/StyleTitle"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/recycler_cast" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler_trailer"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@color/color_tundora"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_marginRight="@dimen/dp_10"
+                    android:padding="@dimen/dp_10"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_title_trailer"
+                    app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                    android:orientation="horizontal"
+                    app:setAdapter="@{viewModel.observableVideoAdapter}"
+                    />
+
+                <TextView
+                    android:id="@+id/text_title_casts"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/title_casts"
+                    style="@style/StyleTitle"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_moreinfo" />
+
+                <TextView
+                    android:id="@+id/text_title_review"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/title_reviews"
+                    style="@style/StyleTitle"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/recycler_trailer" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler_review"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_marginRight="@dimen/dp_10"
+                    android:padding="@dimen/dp_10"
+                    android:background="@color/color_tundora"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_title_review"
+                    app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                    />
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/title_view_more"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_marginRight="@dimen/dp_10"
+                    android:background="@android:color/holo_blue_dark"
+                    app:layout_constraintTop_toBottomOf="@+id/recycler_review"
+                    />
+            </android.support.constraint.ConstraintLayout>
+        </ScrollView>
+    </android.support.constraint.ConstraintLayout>
+</layout>

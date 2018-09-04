@@ -6,9 +6,15 @@
     <string name="error_connect">Connect error</string>
     <string name="title_time">Time: </string>
     <string name="title_imdb">IMDb: </string>
+    <string name="title_release_date">Release date: </string>
     <string name="title_detail">Detail</string>
     <string name="title_popular">Popular</string>
     <string name="title_toprated">Top Rated</string>
     <string name="title_now_playing">Now Playing</string>
     <string name="title_coming">Coming</string>
+    <string name="title_overview">Overview</string>
+    <string name="title_view_more">More</string>
+    <string name="title_trailer">Trailer</string>
+    <string name="title_casts">Casts</string>
+    <string name="title_reviews">Reviews</string>
 </resources>

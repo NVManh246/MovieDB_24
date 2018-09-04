@@ -6,4 +6,10 @@ public final class StringUltis {
         stringBuilder.append(s);
         return stringBuilder.toString();
     }
+
+    public static String getImageUrlYoutube(String key){
+        StringBuilder s = new StringBuilder(Contants.Server.BASE_IMAGE_URL_YOUTUBE);
+        s.append(key).append(Contants.Server.IMAGE_QUALITY);
+        return s.toString();
+    }
 }

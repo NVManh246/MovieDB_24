@@ -18,6 +18,13 @@ public class BindingUltis {
                 .into(imageView);
     }
 
+    @BindingAdapter({"imageUrlYoutube"})
+    public static void loadImgYoutube(ImageView imageView, String key){
+        Glide.with(imageView.getContext())
+                .load(StringUltis.getImageUrlYoutube(key))
+                .into(imageView);
+    }
+
     @BindingAdapter({"setAdapter"})
     public static void setAdapter(RecyclerView recyclerView, RecyclerView.Adapter adapter){
         recyclerView.setAdapter(adapter);
