@@ -36,7 +36,7 @@ public class HomeFragment extends Fragment {
                 false);
         BoxMovieApi api = ApiFactory.getApi();
         SchedulerProvider schedulerProvider = SchedulerProvider.getInstance();
-        mViewModel = new HomeViewModel(
+        mViewModel = new HomeViewModel(getContext(),
                 MoviesRepository.getInstace(MoviesRemoteDataSource.getInstance(api)),
                 schedulerProvider);
         binding.setViewModel(mViewModel);

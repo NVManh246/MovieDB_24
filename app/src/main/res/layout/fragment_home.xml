@@ -53,6 +53,7 @@
                 android:textColor="@android:color/white"
                 android:textStyle="bold"
                 android:textSize="@dimen/sp_20"
+                android:onClick="@{() -> viewModel.onClickPopular()}"
                 />
 
             <Button
@@ -73,6 +74,7 @@
                 android:textColor="@android:color/white"
                 android:textStyle="bold"
                 android:textSize="@dimen/sp_20"
+                android:onClick="@{() -> viewModel.onClickTopRated()}"
                 />
 
             <android.support.constraint.Guideline
@@ -100,6 +102,7 @@
                 android:textColor="@android:color/white"
                 android:textStyle="bold"
                 android:textSize="@dimen/sp_20"
+                android:onClick="@{() -> viewModel.onClickNowPlaying()}"
                 />
 
             <Button
@@ -121,6 +124,7 @@
                 android:textColor="@android:color/white"
                 android:textStyle="bold"
                 android:textSize="@dimen/sp_20"
+                android:onClick="@{() -> viewModel.onClickUpComing()}"
                 />
         </android.support.constraint.ConstraintLayout>
     </ScrollView>
