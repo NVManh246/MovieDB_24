@@ -257,6 +257,7 @@
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/text_title_review"
                     app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                    app:setAdapter="@{viewModel.observableReviewAdapter}"
                     />
 
                 <Button
@@ -269,6 +270,19 @@
                     android:layout_marginRight="@dimen/dp_10"
                     android:background="@android:color/holo_blue_dark"
                     app:layout_constraintTop_toBottomOf="@+id/recycler_review"
+                    android:onClick="@{() -> viewModel.loadMoreReview()}"
+                    android:visibility="@{(viewModel.isLastReview || viewModel.isLoading)? View.GONE : View.VISIBLE}"
+                    />
+
+                <ProgressBar
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_marginRight="@dimen/dp_10"
+                    app:layout_constraintTop_toBottomOf="@+id/recycler_review"
+                    android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.GONE}"
                     />
             </android.support.constraint.ConstraintLayout>
         </ScrollView>

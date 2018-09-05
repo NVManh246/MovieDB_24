@@ -2,6 +2,7 @@ package com.framgia.nvmanh.boxmovie.data.api;
 
 import com.framgia.nvmanh.boxmovie.data.model.MovieDetail;
 import com.framgia.nvmanh.boxmovie.data.model.MovieResutls;
+import com.framgia.nvmanh.boxmovie.data.model.ReviewResults;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;
@@ -22,4 +23,10 @@ public interface BoxMovieApi {
     Observable<MovieDetail> getMovieDetail(
             @Path("id") int id,
             @Query("api_key") String apiKey);
+
+    @GET("movie/{id}/reviews")
+    Observable<ReviewResults> getReviews(@Path("id") int id,
+                                         @Query("api_key") String apiKey,
+                                         @Query("page") int page);
+
 }

@@ -12,4 +12,8 @@ public final class StringUltis {
         s.append(key).append(Contants.Server.IMAGE_QUALITY);
         return s.toString();
     }
+
+    public static String getFirstCharater(String s){
+        return String.valueOf(s.charAt(0)).toUpperCase();
+    }
 }
