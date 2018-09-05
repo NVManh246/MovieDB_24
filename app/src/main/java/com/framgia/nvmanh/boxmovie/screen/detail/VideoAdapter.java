@@ -1,5 +1,6 @@
 package com.framgia.nvmanh.boxmovie.screen.detail;
 
+import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -14,9 +15,11 @@ import java.util.List;
 
 public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.ViewHolder>{
 
+    private Context mContext;
     private List<Video> mVideos;
 
-    public VideoAdapter(List<Video> videos) {
+    public VideoAdapter(Context context, List<Video> videos) {
+        mContext = context;
         mVideos = videos;
     }
 
@@ -27,7 +30,7 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.ViewHolder>{
                 parent.getContext()),
                 R.layout.item_video, parent,
                 false);
-        return new ViewHolder(binding);
+        return new ViewHolder(mContext, binding);
     }
 
     @Override
@@ -43,10 +46,10 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.ViewHolder>{
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private ItemVideoBinding mBinding;
         private ItemVideoViewModel mViewModel;
-        public ViewHolder(ItemVideoBinding binding) {
+        public ViewHolder(Context context, ItemVideoBinding binding) {
             super(binding.getRoot());
             mBinding = binding;
-            mViewModel = new ItemVideoViewModel();
+            mViewModel = new ItemVideoViewModel(context);
             mBinding.setViewModel(mViewModel);
         }
 
