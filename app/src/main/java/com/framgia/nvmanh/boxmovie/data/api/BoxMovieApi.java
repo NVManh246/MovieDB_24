@@ -1,5 +1,6 @@
 package com.framgia.nvmanh.boxmovie.data.api;
 
+import com.framgia.nvmanh.boxmovie.data.model.GenresResults;
 import com.framgia.nvmanh.boxmovie.data.model.MovieDetail;
 import com.framgia.nvmanh.boxmovie.data.model.MovieResutls;
 import com.framgia.nvmanh.boxmovie.data.model.ReviewResults;
@@ -29,4 +30,6 @@ public interface BoxMovieApi {
                                          @Query("api_key") String apiKey,
                                          @Query("page") int page);
 
+    @GET("genre/movie/list")
+    Observable<GenresResults> getGenres(@Query("api_key") String apiKey);
 }

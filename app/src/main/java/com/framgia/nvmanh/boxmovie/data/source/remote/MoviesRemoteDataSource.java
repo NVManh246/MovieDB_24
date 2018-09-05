@@ -1,6 +1,7 @@
 package com.framgia.nvmanh.boxmovie.data.source.remote;
 
 import com.framgia.nvmanh.boxmovie.data.api.BoxMovieApi;
+import com.framgia.nvmanh.boxmovie.data.model.GenresResults;
 import com.framgia.nvmanh.boxmovie.data.model.MovieDetail;
 import com.framgia.nvmanh.boxmovie.data.model.MovieResutls;
 import com.framgia.nvmanh.boxmovie.data.model.ReviewResults;
@@ -42,5 +43,9 @@ public class MoviesRemoteDataSource implements MoviesDataSource.MoviesRemoteData
     @Override
     public Observable<ReviewResults> getReviews(String api, int movieId, int page) {
         return mBoxMovieApi.getReviews(movieId, api, page);
+    }
+
+    public Observable<GenresResults> getGenres(String apiKei) {
+        return mBoxMovieApi.getGenres(apiKei);
     }
 }
