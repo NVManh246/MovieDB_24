@@ -5,4 +5,15 @@
         <item name="colorAccent">@color/color_accent</item>
     </style>
 
+    <style name="StyleTitle" parent="AppTheme">
+        <item name="android:layout_marginLeft">@dimen/dp_10</item>
+        <item name="android:layout_marginRight">@dimen/dp_10</item>
+        <item name="android:layout_marginTop">@dimen/dp_20</item>
+        <item name="android:paddingTop">@dimen/dp_10</item>
+        <item name="android:paddingLeft">@dimen/dp_10</item>
+        <item name="android:textSize">@dimen/sp_16</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@android:color/holo_red_light</item>
+        <item name="android:background">@color/color_tundora</item>
+    </style>
 </resources>
