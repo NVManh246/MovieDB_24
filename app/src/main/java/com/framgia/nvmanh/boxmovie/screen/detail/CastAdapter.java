@@ -1,5 +1,6 @@
 package com.framgia.nvmanh.boxmovie.screen.detail;
 
+import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -14,9 +15,11 @@ import java.util.List;
 
 public class CastAdapter extends RecyclerView.Adapter<CastAdapter.ViewHolder> {
 
+    private Context mContext;
     private List<Cast> mCasts;
 
-    public CastAdapter(List<Cast> casts) {
+    public CastAdapter(Context context, List<Cast> casts) {
+        mContext = context;
         mCasts = casts;
     }
 
@@ -27,7 +30,7 @@ public class CastAdapter extends RecyclerView.Adapter<CastAdapter.ViewHolder> {
                 LayoutInflater.from(parent.getContext()),
                 R.layout.item_cast, parent,
                 false);
-        return new ViewHolder(binding);
+        return new ViewHolder(mContext, binding);
     }
 
     @Override
@@ -41,13 +44,15 @@ public class CastAdapter extends RecyclerView.Adapter<CastAdapter.ViewHolder> {
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
+        private Context mContext;
         private ItemCastBinding mBinding;
         private ItemCastViewModel mViewModel;
 
-        public ViewHolder(ItemCastBinding binding) {
+        public ViewHolder(Context context, ItemCastBinding binding) {
             super(binding.getRoot());
+            mContext = context;
             mBinding = binding;
-            mViewModel = new ItemCastViewModel();
+            mViewModel = new ItemCastViewModel(mContext);
             mBinding.setViewModel(mViewModel);
         }
 

@@ -66,8 +66,8 @@ public class MovieDetailViewModel {
                     @Override
                     public void accept(MovieDetail movieDetail) throws Exception {
                         observableMovieDetail.set(movieDetail);
-                        observableCastAdapter
-                                .set(new CastAdapter(movieDetail.getCastResults().getCasts()));
+                        observableCastAdapter.set(new CastAdapter(mContext,
+                                movieDetail.getCastResults().getCasts()));
                         observableVideoAdapter.set(new VideoAdapter(mContext,
                                 movieDetail.getVideoResults().getVideos()));
                         mReviews.addAll(movieDetail.getReviewsResults().getReviews());

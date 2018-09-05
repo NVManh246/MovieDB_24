@@ -1,5 +1,6 @@
 package com.framgia.nvmanh.boxmovie.screen.genres;
 
+import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -14,9 +15,11 @@ import java.util.List;
 
 public class GenresAdapter extends RecyclerView.Adapter<GenresAdapter.ViewHolder> {
 
+    private Context mContext;
     private List<Genres> mGenres;
 
-    public GenresAdapter(List<Genres> genres) {
+    public GenresAdapter(Context context, List<Genres> genres) {
+        mContext = context;
         mGenres = genres;
     }
 
@@ -27,7 +30,8 @@ public class GenresAdapter extends RecyclerView.Adapter<GenresAdapter.ViewHolder
                 LayoutInflater.from(parent.getContext()),
                 R.layout.item_genres, parent,
                 false);
-        return new ViewHolder(binding);
+
+        return new ViewHolder(mContext, binding);
     }
 
     @Override
@@ -41,12 +45,15 @@ public class GenresAdapter extends RecyclerView.Adapter<GenresAdapter.ViewHolder
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
+        private Context mContext;
         private ItemGenresViewModel mViewModel;
         private ItemGenresBinding mBinding;
-        public ViewHolder(ItemGenresBinding binding) {
+
+        public ViewHolder(Context context, ItemGenresBinding binding) {
             super(binding.getRoot());
+            mContext = context;
             mBinding = binding;
-            mViewModel = new ItemGenresViewModel();
+            mViewModel = new ItemGenresViewModel(context);
             mBinding.setViewModel(mViewModel);
         }
 

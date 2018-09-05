@@ -24,5 +24,6 @@
         <activity android:name=".screen.upcoming.UpComingActivity"/>
         <activity android:name=".screen.video.VideoActivity"
             android:screenOrientation="landscape"/>
+        <activity android:name=".screen.movie.MovieActivity"/>
     </application>
 </manifest>
