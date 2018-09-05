@@ -8,7 +8,10 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.framgia.nvmanh.boxmovie.BuildConfig;
 import com.framgia.nvmanh.boxmovie.screen.base.EndLessRecyclerOnScrollListener;
+import com.google.android.youtube.player.YouTubePlayer;
+import com.google.android.youtube.player.YouTubePlayerView;
 
 public class BindingUltis {
     @BindingAdapter({"imageUrl"})
@@ -51,5 +54,11 @@ public class BindingUltis {
     @BindingAdapter({"autoSwipe"})
     public static void setAutoSwipe(ViewPager viewPager, int i){
         viewPager.setCurrentItem(i, true);
+    }
+
+    @BindingAdapter("onInitializedListener")
+    public static void setOnInitializedListener(
+            YouTubePlayerView youTubePlayerView, YouTubePlayer.OnInitializedListener listener){
+        youTubePlayerView.initialize(BuildConfig.YOUTUBE_API_KEY, listener);
     }
 }

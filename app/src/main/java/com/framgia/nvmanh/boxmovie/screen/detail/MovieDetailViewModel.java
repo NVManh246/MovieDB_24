@@ -53,8 +53,8 @@ public class MovieDetailViewModel {
                         observableMovieDetail.set(movieDetail);
                         observableCastAdapter
                                 .set(new CastAdapter(movieDetail.getCastResults().getCasts()));
-                        observableVideoAdapter
-                                .set(new VideoAdapter(movieDetail.getVideoResults().getVideos()));
+                        observableVideoAdapter.set(new VideoAdapter(mContext,
+                                movieDetail.getVideoResults().getVideos()));
                         isLoading.set(false);
                     }
                 }, new Consumer<Throwable>() {
