@@ -29,7 +29,7 @@ public abstract class BaseGenresActivity extends AppCompatActivity {
         MoviesLocalDataSource localDataSource = MoviesLocalDataSource.getInstance(moviesDAO);
         MoviesRepository repository = MoviesRepository.getInstace(remoteDataSource, localDataSource);
 
-        mViewModel = new BaseGenresViewModel(repository, schedulerProvider);
+        mViewModel = new BaseGenresViewModel(this, repository, schedulerProvider);
         mViewModel.setType(getType());
 
         ActivityBaseMovieBinding binding =

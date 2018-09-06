@@ -44,7 +44,7 @@ public class SearchViewModel {
         mSchedulerProvider = schedulerProvider;
         mCompositeDisposable = new CompositeDisposable();
         mMovies = new ArrayList<>();
-        mMovieAdapter = new MovieAdapter(mMovies);
+        mMovieAdapter = new MovieAdapter(mContext, mMovies);
         observableMovieAdapter.set(mMovieAdapter);
         observableItemDecoration.set(new VerticalSpaceItemDecoration(SPACING));
         mPage = NUMBER_ONE;

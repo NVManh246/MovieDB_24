@@ -51,7 +51,7 @@ public class MovieActivity extends AppCompatActivity{
         MoviesLocalDataSource localDataSource = MoviesLocalDataSource.getInstance(moviesDAO);
         MoviesRepository repository = MoviesRepository.getInstace(remoteDataSource, localDataSource);
 
-        mViewModel = new MovieViewModel(repository, schedulerProvider);
+        mViewModel = new MovieViewModel(this, repository, schedulerProvider);
         ActivityMovieBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_movie);
         binding.setViewModel(mViewModel);
         getSearchType();

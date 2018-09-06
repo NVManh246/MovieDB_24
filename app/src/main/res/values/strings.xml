@@ -17,4 +17,8 @@
     <string name="title_trailer">Trailer</string>
     <string name="title_casts">Casts</string>
     <string name="title_reviews">Reviews</string>
+    <string name="title_add_to_wishlist">Add to wishlist</string>
+    <string name="title_remove_to_wishlist">Remove to wishlist</string>
+    <string name="msg_add_to_wishlist">Adding to wishlist...</string>
+    <string name="msg_remove_to_wishlist">Removing to wishlist...</string>
 </resources>

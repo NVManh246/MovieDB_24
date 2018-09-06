@@ -1,5 +1,6 @@
 package com.framgia.nvmanh.boxmovie.screen.base;
 
+import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -13,9 +14,12 @@ import com.framgia.nvmanh.boxmovie.databinding.ItemMovieBinding;
 import java.util.List;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> {
+
+    private Context mContext;
     private List<Movie> mMovies;
 
-    public MovieAdapter(List<Movie> movies) {
+    public MovieAdapter(Context context, List<Movie> movies) {
+        mContext = context;
         mMovies = movies;
     }
 
@@ -24,7 +28,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         ItemMovieBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()),
                 R.layout.item_movie, parent, false);
-        return new ViewHolder(binding);
+        return new ViewHolder(mContext, binding);
     }
 
     @Override
@@ -37,15 +41,15 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         return mMovies != null ? mMovies.size() : 0;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
 
         private ItemMovieViewModel mViewModel;
         private ItemMovieBinding mBinding;
 
-        public ViewHolder(ItemMovieBinding binding) {
+        public ViewHolder(Context context, ItemMovieBinding binding) {
             super(binding.getRoot());
             mBinding = binding;
-            mViewModel = new ItemMovieViewModel();
+            mViewModel = new ItemMovieViewModel(context);
             mBinding.setViewModel(mViewModel);
         }
 
