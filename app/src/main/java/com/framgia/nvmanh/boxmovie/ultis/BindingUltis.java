@@ -40,6 +40,12 @@ public class BindingUltis {
         recyclerView.addItemDecoration(itemDecoration);
     }
 
+    @BindingAdapter({"addLinearDecoration"})
+    public static void addLinearDecoration(RecyclerView recyclerView,
+                                     RecyclerView.ItemDecoration itemDecoration){
+        recyclerView.addItemDecoration(itemDecoration);
+    }
+
     @BindingAdapter({"setOnScroll"})
     public static void setScroll(RecyclerView recyclerView,
                                  EndLessRecyclerOnScrollListener listener){
