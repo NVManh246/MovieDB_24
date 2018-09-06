@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.framgia.nvmanh.boxmovie.BuildConfig;
 import com.framgia.nvmanh.boxmovie.screen.base.EndLessRecyclerOnScrollListener;
+import com.framgia.nvmanh.boxmovie.screen.genres.GridSpacingItemDecoration;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
 
@@ -31,6 +32,12 @@ public class BindingUltis {
     @BindingAdapter({"setAdapter"})
     public static void setAdapter(RecyclerView recyclerView, RecyclerView.Adapter adapter){
         recyclerView.setAdapter(adapter);
+    }
+
+    @BindingAdapter({"addDecoration"})
+    public static void addDecoration(RecyclerView recyclerView,
+                                     GridSpacingItemDecoration itemDecoration){
+        recyclerView.addItemDecoration(itemDecoration);
     }
 
     @BindingAdapter({"setOnScroll"})
