@@ -21,6 +21,7 @@
             android:textAllCaps="false"
             android:textStyle="bold"
             android:textSize="@dimen/sp_20"
+            android:onClick="@{() -> viewModel.onClickItemGenres()}"
             />
     </android.support.constraint.ConstraintLayout>
 </layout>

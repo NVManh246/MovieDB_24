@@ -14,5 +14,7 @@ public interface MoviesDataSource {
         Observable<MovieDetail> getMovieDetail(String apiKey, int movieId);
         Observable<ReviewResults> getReviews(String api, int movieId, int page);
         Observable<GenresResults> getGenres(String apiKei);
+        Observable<MovieResutls> getMoviesByGenres(String apiKey, int genresId, int page);
+        Observable<MovieResutls> getMoviesByCast(String apiKey, int castId, int page);
     }
 }

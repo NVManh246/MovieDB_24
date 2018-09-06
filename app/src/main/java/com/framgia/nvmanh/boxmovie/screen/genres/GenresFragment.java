@@ -36,7 +36,7 @@ public class GenresFragment extends Fragment {
                 false);
         BoxMovieApi api = ApiFactory.getApi();
         SchedulerProvider schedulerProvider = SchedulerProvider.getInstance();
-        mViewModel = new GenresViewModel(
+        mViewModel = new GenresViewModel(getContext(),
                 MoviesRepository.getInstace(MoviesRemoteDataSource.getInstance(api)),
                 schedulerProvider);
         binding.setViewModel(mViewModel);

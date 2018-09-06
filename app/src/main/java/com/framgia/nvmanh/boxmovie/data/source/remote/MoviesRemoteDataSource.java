@@ -45,6 +45,16 @@ public class MoviesRemoteDataSource implements MoviesDataSource.MoviesRemoteData
         return mBoxMovieApi.getReviews(movieId, api, page);
     }
 
+    public Observable<MovieResutls> getMoviesByGenres(String apiKey, int genres, int page) {
+        return mBoxMovieApi.getMoviesByGenres(apiKey, genres, page);
+    }
+
+    @Override
+    public Observable<MovieResutls> getMoviesByCast(String apiKey, int castId, int page) {
+        return mBoxMovieApi.getMoviesByCast(apiKey, castId, page);
+    }
+
+    @Override
     public Observable<GenresResults> getGenres(String apiKei) {
         return mBoxMovieApi.getGenres(apiKei);
     }

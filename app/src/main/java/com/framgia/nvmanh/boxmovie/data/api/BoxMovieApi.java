@@ -32,4 +32,16 @@ public interface BoxMovieApi {
 
     @GET("genre/movie/list")
     Observable<GenresResults> getGenres(@Query("api_key") String apiKey);
+
+    @GET("discover/movie")
+    Observable<MovieResutls> getMoviesByGenres(
+            @Query("api_key") String apiKey,
+            @Query("with_genres") int genresId,
+            @Query("page") int page);
+
+    @GET("discover/movie")
+    Observable<MovieResutls> getMoviesByCast(
+            @Query("api_key") String apiKey,
+            @Query("with_cast") int castId,
+            @Query("page") int page);
 }
