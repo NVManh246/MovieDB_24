@@ -7,11 +7,13 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.framgia.nvmanh.boxmovie.R;
 import com.framgia.nvmanh.boxmovie.data.api.ApiFactory;
-import com.framgia.nvmanh.boxmovie.data.api.BoxMovieApi;
 import com.framgia.nvmanh.boxmovie.data.source.MoviesRepository;
+import com.framgia.nvmanh.boxmovie.data.source.local.MoviesLocalDataSource;
+import com.framgia.nvmanh.boxmovie.data.source.local.sqlite.DBHelper;
+import com.framgia.nvmanh.boxmovie.data.source.local.sqlite.MoviesDAOImpl;
 import com.framgia.nvmanh.boxmovie.data.source.remote.MoviesRemoteDataSource;
-import com.framgia.nvmanh.boxmovie.ultis.schedulers.SchedulerProvider;
 import com.framgia.nvmanh.boxmovie.databinding.ActivityBaseMovieBinding;
+import com.framgia.nvmanh.boxmovie.ultis.schedulers.SchedulerProvider;
 
 public abstract class BaseGenresActivity extends AppCompatActivity {
 
@@ -21,11 +23,13 @@ public abstract class BaseGenresActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        BoxMovieApi api = ApiFactory.getApi();
         SchedulerProvider schedulerProvider = SchedulerProvider.getInstance();
-        mViewModel = new BaseGenresViewModel(
-                MoviesRepository.getInstace(MoviesRemoteDataSource.getInstance(api)),
-                schedulerProvider);
+        MoviesRemoteDataSource remoteDataSource = MoviesRemoteDataSource.getInstance(ApiFactory.getApi());
+        MoviesDAOImpl moviesDAO = new MoviesDAOImpl(DBHelper.getInstance(this));
+        MoviesLocalDataSource localDataSource = MoviesLocalDataSource.getInstance(moviesDAO);
+        MoviesRepository repository = MoviesRepository.getInstace(remoteDataSource, localDataSource);
+
+        mViewModel = new BaseGenresViewModel(repository, schedulerProvider);
         mViewModel.setType(getType());
 
         ActivityBaseMovieBinding binding =

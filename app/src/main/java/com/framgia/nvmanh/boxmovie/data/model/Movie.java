@@ -22,6 +22,8 @@ public class Movie {
     @SerializedName("overview")
     private String mOverview;
 
+    public Movie(){}
+
     public Movie(int id, float vote, String title, String poster, String backdrop,
                  List<Integer> genreIds, String releaseDate, String overview) {
         mId = id;

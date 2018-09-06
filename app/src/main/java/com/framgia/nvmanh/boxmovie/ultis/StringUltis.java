@@ -16,4 +16,18 @@ public final class StringUltis {
     public static String getFirstCharater(String s){
         return String.valueOf(s.charAt(0)).toUpperCase();
     }
+
+    public static String getQureryCreateTable(String... args){
+        StringBuilder builder = new StringBuilder();
+        for(int i = 0; i < args.length; i++){
+            builder.append(args[i]);
+        }
+        return builder.toString();
+    }
+
+    public static String getQueryDropTable(String key, String tableName){
+        StringBuilder builder = new StringBuilder(key);
+        builder.append(tableName);
+        return builder.toString();
+    }
 }

@@ -11,8 +11,10 @@ import android.view.ViewGroup;
 
 import com.framgia.nvmanh.boxmovie.R;
 import com.framgia.nvmanh.boxmovie.data.api.ApiFactory;
-import com.framgia.nvmanh.boxmovie.data.api.BoxMovieApi;
 import com.framgia.nvmanh.boxmovie.data.source.MoviesRepository;
+import com.framgia.nvmanh.boxmovie.data.source.local.MoviesLocalDataSource;
+import com.framgia.nvmanh.boxmovie.data.source.local.sqlite.DBHelper;
+import com.framgia.nvmanh.boxmovie.data.source.local.sqlite.MoviesDAOImpl;
 import com.framgia.nvmanh.boxmovie.data.source.remote.MoviesRemoteDataSource;
 import com.framgia.nvmanh.boxmovie.databinding.FragmentHomeBinding;
 import com.framgia.nvmanh.boxmovie.ultis.schedulers.SchedulerProvider;
@@ -34,11 +36,14 @@ public class HomeFragment extends Fragment {
                 LayoutInflater.from(container.getContext()),
                 R.layout.fragment_home, container,
                 false);
-        BoxMovieApi api = ApiFactory.getApi();
+
         SchedulerProvider schedulerProvider = SchedulerProvider.getInstance();
-        mViewModel = new HomeViewModel(getContext(),
-                MoviesRepository.getInstace(MoviesRemoteDataSource.getInstance(api)),
-                schedulerProvider);
+        MoviesRemoteDataSource remoteDataSource = MoviesRemoteDataSource.getInstance(ApiFactory.getApi());
+        MoviesDAOImpl moviesDAO = new MoviesDAOImpl(DBHelper.getInstance(container.getContext()));
+        MoviesLocalDataSource localDataSource = MoviesLocalDataSource.getInstance(moviesDAO);
+        MoviesRepository repository = MoviesRepository.getInstace(remoteDataSource, localDataSource);
+
+        mViewModel = new HomeViewModel(getContext(), repository, schedulerProvider);
         binding.setViewModel(mViewModel);
         mViewModel.start();
         return binding.getRoot();
