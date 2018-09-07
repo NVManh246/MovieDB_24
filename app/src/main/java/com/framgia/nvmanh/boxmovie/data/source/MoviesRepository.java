@@ -1,25 +1,34 @@
 package com.framgia.nvmanh.boxmovie.data.source;
 
 import com.framgia.nvmanh.boxmovie.data.model.GenresResults;
+import com.framgia.nvmanh.boxmovie.data.model.Movie;
 import com.framgia.nvmanh.boxmovie.data.model.MovieDetail;
 import com.framgia.nvmanh.boxmovie.data.model.MovieResutls;
 import com.framgia.nvmanh.boxmovie.data.model.ReviewResults;
+import com.framgia.nvmanh.boxmovie.data.source.local.MoviesLocalDataSource;
 import com.framgia.nvmanh.boxmovie.data.source.remote.MoviesRemoteDataSource;
+
+import java.util.List;
 
 import io.reactivex.Observable;
 
-public class MoviesRepository implements MoviesDataSource.MoviesRemoteDataSource {
+public class MoviesRepository implements MoviesDataSource.MoviesRemoteDataSource,
+        MoviesDataSource.MoviesLocalDataSource{
 
     private static MoviesRepository sInstace;
     private MoviesDataSource.MoviesRemoteDataSource mRemoteDataSource;
+    private MoviesDataSource.MoviesLocalDataSource mLocalDataSource;
 
-    private MoviesRepository(MoviesRemoteDataSource remoteDataSource){
+    private MoviesRepository(MoviesRemoteDataSource remoteDataSource,
+                             MoviesLocalDataSource localDataSource){
         mRemoteDataSource = remoteDataSource;
+        mLocalDataSource = localDataSource;
     }
 
-    public static MoviesRepository getInstace(MoviesRemoteDataSource remoteDataSource){
+    public static MoviesRepository getInstace(MoviesRemoteDataSource remoteDataSource,
+                                              MoviesLocalDataSource localDataSource){
         if(sInstace == null){
-            sInstace = new MoviesRepository(remoteDataSource);
+            sInstace = new MoviesRepository(remoteDataSource, localDataSource);
         }
         return sInstace;
     }
@@ -61,5 +70,25 @@ public class MoviesRepository implements MoviesDataSource.MoviesRemoteDataSource
     @Override
     public Observable<MovieResutls> searchMoviesByTitle(String apiKey, String title, int page) {
         return mRemoteDataSource.searchMoviesByTitle(apiKey, title, page);
+    }
+
+    @Override
+    public List<Movie> getMovies() {
+        return mLocalDataSource.getMovies();
+    }
+
+    @Override
+    public boolean addMovie(Movie movie) {
+        return mLocalDataSource.addMovie(movie);
+    }
+
+    @Override
+    public boolean removeMovie(int movieId) {
+        return mLocalDataSource.removeMovie(movieId);
+    }
+
+    @Override
+    public boolean isFavorite(int movieId) {
+        return mLocalDataSource.isFavorite(movieId);
     }
 }
