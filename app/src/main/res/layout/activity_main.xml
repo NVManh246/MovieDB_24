@@ -22,13 +22,23 @@
             app:layout_constraintRight_toRightOf="parent"
             app:title="@string/app_name"
             app:titleTextColor="@android:color/white"
-            android:background="@color/color_ochre"
+            android:background="@color/color_tundora"
+            />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            android:background="@color/color_gray"
             />
 
         <FrameLayout
             android:id="@+id/frame_container"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginTop="@dimen/dp_1"
             app:layout_constraintTop_toBottomOf="@+id/toolbar"
             app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -45,7 +55,7 @@
             app:menu="@menu/menu_main"
             app:itemIconTint="@android:color/white"
             app:itemTextColor="@android:color/white"
-            android:background="@color/color_ochre"
+            android:background="@color/color_tundora"
             app:onNavigationChanged="@{viewModel.mItemListener}"/>
             />
 

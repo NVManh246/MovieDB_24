@@ -158,4 +158,16 @@ public class MovieDetail {
     public ReviewResults getReviewsResults() {
         return mReviewsResults;
     }
+
+    public Movie getMovie(){
+        Movie movie = new Movie();
+        movie.setId(mId);
+        movie.setTitle(mTitle);
+        movie.setVote(mVote);
+        movie.setPoster(mPosterPath);
+        movie.setBackdrop(mBackdropPath);
+        movie.setOverview(mOverview);
+        movie.setReleaseDate(mReleaseDate);
+        return movie;
+    }
 }

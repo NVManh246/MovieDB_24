@@ -5,6 +5,7 @@ import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
 
 import com.framgia.nvmanh.boxmovie.BuildConfig;
+import com.framgia.nvmanh.boxmovie.data.model.Movie;
 import com.framgia.nvmanh.boxmovie.data.model.MovieDetail;
 import com.framgia.nvmanh.boxmovie.data.model.Review;
 import com.framgia.nvmanh.boxmovie.data.model.ReviewResults;
@@ -25,7 +26,10 @@ public class MovieDetailViewModel {
     public ObservableField<VideoAdapter> observableVideoAdapter = new ObservableField<>();
     public ObservableField<ReviewAdapter> observableReviewAdapter = new ObservableField<>();
     public ObservableBoolean isLoading = new ObservableBoolean(false);
+    public ObservableBoolean isLoadingReview = new ObservableBoolean(false);
+    public ObservableBoolean isFavorite = new ObservableBoolean(false);
     public ObservableBoolean isError = new ObservableBoolean(false);
+    public ObservableBoolean isErrorReview = new ObservableBoolean(false);
     public ObservableBoolean isLastReview = new ObservableBoolean(false);
 
     private Context mContext;
@@ -70,7 +74,13 @@ public class MovieDetailViewModel {
                                 movieDetail.getCastResults().getCasts()));
                         observableVideoAdapter.set(new VideoAdapter(mContext,
                                 movieDetail.getVideoResults().getVideos()));
-                        mReviews.addAll(movieDetail.getReviewsResults().getReviews());
+                        List<Review> reviews = movieDetail.getReviewsResults().getReviews();
+                        if(reviews.size() != 0) {
+                            mReviews.addAll(reviews);
+                        } else {
+                            isLastReview.set(true);
+                        }
+                        isFavorite.set(mMoviesRepository.isFavorite(movieId));
                         mReviewAdapter.notifyDataSetChanged();
                         isLoading.set(false);
                     }
@@ -85,7 +95,7 @@ public class MovieDetailViewModel {
     }
 
     public void loadMoreReview(){
-        isLoading.set(true);
+        isLoadingReview.set(true);
         Disposable disposable = mMoviesRepository.getReviews(BuildConfig.API_KEY, mMovieId, mPageReview)
                 .observeOn(mSchedulerProvider.ui())
                 .subscribeOn(mSchedulerProvider.io())
@@ -98,18 +108,36 @@ public class MovieDetailViewModel {
                             int oldSize = mReviews.size();
                             mReviews.addAll(reviewResults.getReviews());
                             mReviewAdapter.notifyItemRangeChanged(oldSize, mReviews.size());
-                            isLoading.set(false);
+                            isLoadingReview.set(false);
+                            isErrorReview.set(false);
                         } else {
+                            mPageReview--;
                             isLastReview.set(true);
-                            isLoading.set(false);
+                            isLoadingReview.set(false);
                         }
                     }
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                        isError.set(true);
+                        isErrorReview.set(true);
+                        isLoadingReview.set(false);
                     }
                 });
         mCompositeDisposable.add(disposable);
+    }
+
+    public void onClickFavourite(){
+        if(isFavorite.get()){
+            mMoviesRepository.removeMovie(mMovieId);
+            isFavorite.set(false);
+        } else {
+            mMoviesRepository.addMovie(observableMovieDetail.get().getMovie());
+            isFavorite.set(true);
+        }
+    }
+
+    public void retry(){
+        isError.set(false);
+        loadMovieDetail(mMovieId);
     }
 }

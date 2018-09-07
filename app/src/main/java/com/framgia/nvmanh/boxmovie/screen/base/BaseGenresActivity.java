@@ -4,6 +4,8 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
 
 import com.framgia.nvmanh.boxmovie.R;
 import com.framgia.nvmanh.boxmovie.data.api.ApiFactory;
@@ -34,14 +36,21 @@ public abstract class BaseGenresActivity extends AppCompatActivity {
 
         ActivityBaseMovieBinding binding =
                 DataBindingUtil.setContentView(this, R.layout.activity_base_movie);
+        setupToolbar(binding.toolbar);
         binding.setViewModel(mViewModel);
+        mViewModel.start();
+    }
+
+    private void setupToolbar(Toolbar toolbar){
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     public abstract String getType();
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        mViewModel.start();
-    }
 }

@@ -1,5 +1,7 @@
 package com.framgia.nvmanh.boxmovie.screen.search;
 
+import android.content.Context;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -18,6 +20,11 @@ import com.framgia.nvmanh.boxmovie.ultis.schedulers.SchedulerProvider;
 public class SearchActivity extends AppCompatActivity {
 
     private SearchViewModel mViewModel;
+
+    public static Intent getSearchIntent(Context context) {
+        Intent intent = new Intent(context, SearchActivity.class);
+        return intent;
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
