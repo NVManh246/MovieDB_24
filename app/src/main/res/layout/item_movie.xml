@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/color_tundora"
+        android:onClick="@{() -> viewModel.onClickItemMovie()}"
         >
 
         <ImageView
@@ -28,11 +29,23 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/dp_5"
             android:layout_marginLeft="@dimen/dp_10"
+            android:maxLines="1"
+            android:ellipsize="end"
             android:text="@{viewModel.observableMovie.title}"
             android:textColor="@android:color/white"
             android:textSize="@dimen/sp_16"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/imageView"
             app:layout_constraintStart_toEndOf="@+id/image_movie"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_5"
+            android:onClick="@{(v) -> viewModel.onClickPopupMenu(v)}"
+            android:src="@drawable/ic_more_vert_white_24dp"
+            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </android.support.constraint.ConstraintLayout>
 </layout>

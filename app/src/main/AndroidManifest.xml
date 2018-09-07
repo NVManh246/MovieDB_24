@@ -25,5 +25,6 @@
         <activity android:name=".screen.video.VideoActivity"
             android:screenOrientation="landscape"/>
         <activity android:name=".screen.movie.MovieActivity"/>
+        <activity android:name=".screen.detail.MovieDetailActivity"/>
     </application>
 </manifest>

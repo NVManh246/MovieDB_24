@@ -17,7 +17,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String OPEN_BRACKET = "(";
     public static final String DROP_TABLE = "DROP TABLE IF EXISTS";
 
-    public static final String TABLE_NAME = "movie";
+    public static final String TABLE_NAME = " movie";
     public static final String COLUMN_ID = "id";
     public static final String COLUMN_VOTE = "vote";
     public static final String COLUMN_TITLE = "title";

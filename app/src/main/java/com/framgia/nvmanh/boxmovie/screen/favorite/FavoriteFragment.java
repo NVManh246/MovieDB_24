@@ -45,4 +45,10 @@ public class FavoriteFragment extends Fragment{
         binding.setViewModel(mViewModel);
         return binding.getRoot();
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        mViewModel.start();
+    }
 }

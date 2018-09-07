@@ -1,5 +1,6 @@
 package com.framgia.nvmanh.boxmovie.screen.movie;
 
+import android.content.Context;
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
 
@@ -22,6 +23,7 @@ public class MovieViewModel {
     public ObservableBoolean isLoading = new ObservableBoolean();
     public ObservableBoolean isError = new ObservableBoolean();
 
+    private Context mContext;
     private MoviesRepository mMoviesRepository;
     private BaseSchedulerProvider mSchedulerProvider;
     private CompositeDisposable mCompositeDisposable;
@@ -31,13 +33,14 @@ public class MovieViewModel {
     private int mId;
     private int mPage = 1;
 
-    public MovieViewModel(MoviesRepository moviesRepository,
+    public MovieViewModel(Context context, MoviesRepository moviesRepository,
                            BaseSchedulerProvider schedulerProvider) {
+        mContext = context;
         mMoviesRepository = moviesRepository;
         mSchedulerProvider = schedulerProvider;
         mCompositeDisposable = new CompositeDisposable();
         mMovies = new ArrayList<>();
-        mMovieAdapter = new MovieAdapter(mMovies);
+        mMovieAdapter = new MovieAdapter(mContext, mMovies);
         obervableMovieAdapter.set(mMovieAdapter);
     }
 
