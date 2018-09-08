@@ -78,7 +78,7 @@
             android:layout_marginTop="@dimen/dp_10"
             android:ellipsize="end"
             android:maxLines="3"
-            android:text="@string/title_time"
+            android:text="@string/title_release_date"
             android:textColor="@android:color/white"
             android:textSize="@dimen/sp_12"
             android:textStyle="bold"
@@ -97,9 +97,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginLeft="@dimen/dp_5"
             android:ellipsize="end"
             android:maxLines="3"
-            android:text="@{String.valueOf(viewModel.observableMovie.vote)}"
+            android:text="@{viewModel.observableMovie.releaseDate}"
             android:textSize="@dimen/sp_12"
             android:textColor="@android:color/white"
             app:layout_constraintStart_toEndOf="@+id/text_title_time"
@@ -122,6 +123,7 @@
             android:id="@+id/text_imdb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_5"
             android:text="@{String.valueOf(viewModel.observableMovie.vote)}"
             android:textColor="@android:color/white"
             android:textSize="@dimen/sp_12"
@@ -141,6 +143,7 @@
             android:textColor="@android:color/white"
             app:layout_constraintBottom_toBottomOf="@+id/image_content"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/guide_line" />
+            app:layout_constraintStart_toStartOf="@+id/guide_line"
+            android:onClick="@{() -> viewModel.onClickItemMovie()}"/>
     </android.support.constraint.ConstraintLayout>
 </layout>

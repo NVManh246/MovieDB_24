@@ -25,6 +25,7 @@
             />
 
         <TextView
+            android:id="@+id/text_title_movie"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/dp_5"
@@ -32,14 +33,64 @@
             android:maxLines="1"
             android:ellipsize="end"
             android:text="@{viewModel.observableMovie.title}"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/holo_red_dark"
             android:textSize="@dimen/sp_16"
-            app:layout_constraintEnd_toStartOf="@+id/imageView"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/image_popup"
             app:layout_constraintStart_toEndOf="@+id/image_movie"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/text_title_imdb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_5"
+            android:text="@string/title_imdb"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/sp_12"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@+id/text_title_movie"
+            app:layout_constraintLeft_toRightOf="@+id/image_movie"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_5"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/sp_12"
+            android:text="@{String.valueOf(viewModel.observableMovie.vote)}"
+            app:layout_constraintTop_toBottomOf="@+id/text_title_movie"
+            app:layout_constraintLeft_toRightOf="@+id/text_title_imdb"
+            />
+
+        <TextView
+            android:id="@+id/text_title_release_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_5"
+            android:text="@string/title_release"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/sp_12"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@+id/text_title_imdb"
+            app:layout_constraintLeft_toRightOf="@+id/image_movie"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_5"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/sp_12"
+            android:text="@{viewModel.getYear}"
+            app:layout_constraintTop_toBottomOf="@+id/text_title_imdb"
+            app:layout_constraintLeft_toRightOf="@+id/text_title_release_date"
+            />
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/image_popup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/dp_5"

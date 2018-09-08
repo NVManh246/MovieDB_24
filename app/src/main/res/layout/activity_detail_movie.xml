@@ -111,7 +111,7 @@
                     android:textColor="@android:color/white"
                     android:textStyle="bold"
                     app:layout_constraintLeft_toRightOf="@+id/image_poster"
-                    app:layout_constraintBottom_toTopOf="@+id/text_title_imdb"
+                    app:layout_constraintBottom_toTopOf="@+id/image_imdb"
                     />
 
                 <TextView
@@ -120,18 +120,15 @@
                     android:layout_marginLeft="@dimen/dp_10"
                     android:text="@{String.valueOf(viewModel.observableMovieDetail.releaseDate)}"
                     android:textColor="@android:color/white"
-                    app:layout_constraintBottom_toTopOf="@+id/text_title_imdb"
+                    app:layout_constraintBottom_toTopOf="@+id/image_imdb"
                     app:layout_constraintStart_toEndOf="@+id/text_title_release_date" />
 
-
-                <TextView
-                    android:id="@+id/text_title_imdb"
+                <ImageView
+                    android:id="@+id/image_imdb"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dp_10"
-                    android:text="@string/title_imdb"
-                    android:textColor="@android:color/white"
-                    android:textStyle="bold"
+                    android:src="@drawable/imdb"
                     app:layout_constraintBottom_toTopOf="@+id/text_title_time"
                     app:layout_constraintLeft_toRightOf="@+id/image_poster" />
 
@@ -142,7 +139,7 @@
                     android:text="@{String.valueOf(viewModel.observableMovieDetail.vote)}"
                     android:textColor="@android:color/holo_red_light"
                     app:layout_constraintBottom_toTopOf="@+id/text_time"
-                    app:layout_constraintStart_toEndOf="@+id/text_title_imdb" />
+                    app:layout_constraintStart_toEndOf="@+id/image_imdb" />
 
                 <TextView
                     android:id="@+id/text_title_time"

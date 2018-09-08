@@ -18,6 +18,7 @@ import com.framgia.nvmanh.boxmovie.data.source.local.sqlite.DBHelper;
 import com.framgia.nvmanh.boxmovie.data.source.local.sqlite.MoviesDAOImpl;
 import com.framgia.nvmanh.boxmovie.data.source.remote.MoviesRemoteDataSource;
 import com.framgia.nvmanh.boxmovie.screen.detail.MovieDetailActivity;
+import com.framgia.nvmanh.boxmovie.ultis.StringUltis;
 
 public class ItemMovieViewModel {
     public ObservableField<Movie> observableMovie = new ObservableField<>();
@@ -43,6 +44,10 @@ public class ItemMovieViewModel {
         Intent intent = MovieDetailActivity.getMovieDetailIntent(mContext,
                 observableMovie.get().getId());
         mContext.startActivity(intent);
+    }
+
+    public String getYear(){
+        return StringUltis.getYear(observableMovie.get().getReleaseDate());
     }
 
     public void onClickPopupMenu(View view){
