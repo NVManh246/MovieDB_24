@@ -223,7 +223,9 @@
                     android:textColor="@color/color_ochre"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/text_overview" />
+                    app:layout_constraintTop_toBottomOf="@+id/text_overview"
+                    android:onClick="@{() -> viewModel.onClickViewMore()}"
+                    />
 
                 <TextView
                     android:id="@+id/text_title_trailer"
@@ -284,6 +286,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/text_title_review"
                     app:layoutManager="android.support.v7.widget.LinearLayoutManager"
                     app:setAdapter="@{viewModel.observableReviewAdapter}"
+                    android:nestedScrollingEnabled="false"
                     />
 
                 <Button

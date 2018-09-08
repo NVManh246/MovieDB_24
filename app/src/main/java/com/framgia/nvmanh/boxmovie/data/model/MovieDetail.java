@@ -1,10 +1,14 @@
 package com.framgia.nvmanh.boxmovie.data.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class MovieDetail {
+public class MovieDetail implements Parcelable{
     @SerializedName("id")
     private int mId;
     @SerializedName("title")
@@ -38,6 +42,34 @@ public class MovieDetail {
 
     public MovieDetail() {
     }
+
+    protected MovieDetail(Parcel in) {
+        mId = in.readInt();
+        mTitle = in.readString();
+        mVote = in.readFloat();
+        mPosterPath = in.readString();
+        mBackdropPath = in.readString();
+        mOverview = in.readString();
+        mReleaseDate = in.readString();
+        mBudget = in.readLong();
+        mRevenue = in.readLong();
+        mRuntime = in.readInt();
+        mStatus = in.readString();
+        mGenres = new ArrayList<>();
+        in.readList(mGenres, MovieDetail.class.getClassLoader());
+    }
+
+    public static final Creator<MovieDetail> CREATOR = new Creator<MovieDetail>() {
+        @Override
+        public MovieDetail createFromParcel(Parcel in) {
+            return new MovieDetail(in);
+        }
+
+        @Override
+        public MovieDetail[] newArray(int size) {
+            return new MovieDetail[size];
+        }
+    };
 
     public void setId(int id) {
         mId = id;
@@ -159,7 +191,7 @@ public class MovieDetail {
         return mReviewsResults;
     }
 
-    public Movie getMovie(){
+    public Movie getMovie() {
         Movie movie = new Movie();
         movie.setId(mId);
         movie.setTitle(mTitle);
@@ -169,5 +201,26 @@ public class MovieDetail {
         movie.setOverview(mOverview);
         movie.setReleaseDate(mReleaseDate);
         return movie;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeInt(mId);
+        parcel.writeString(mTitle);
+        parcel.writeFloat(mVote);
+        parcel.writeString(mPosterPath);
+        parcel.writeString(mBackdropPath);
+        parcel.writeString(mOverview);
+        parcel.writeString(mReleaseDate);
+        parcel.writeLong(mBudget);
+        parcel.writeLong(mRevenue);
+        parcel.writeInt(mRuntime);
+        parcel.writeString(mStatus);
+        parcel.writeList(mGenres);
     }
 }

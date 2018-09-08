@@ -18,6 +18,12 @@
     <string name="title_casts">Casts</string>
     <string name="title_reviews">Reviews</string>
     <string name="title_search">Search</string>
+    <string name="title_status">Status</string>
+    <string name="title_vote">Vote</string>
+    <string name="title_release_date_second">Release date</string>
+    <string name="title_runtime">Runtime</string>
+    <string name="title_budget">Budget</string>
+    <string name="title_revenue">Revenue</string>
     <string name="title_add_to_wishlist">Add to wishlist</string>
     <string name="title_remove_to_wishlist">Remove to wishlist</string>
     <string name="action_retry">Retry</string>
