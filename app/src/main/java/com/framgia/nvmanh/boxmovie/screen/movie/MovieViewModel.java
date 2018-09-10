@@ -4,6 +4,7 @@ import android.content.Context;
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 import com.framgia.nvmanh.boxmovie.BuildConfig;
 import com.framgia.nvmanh.boxmovie.data.model.Movie;
@@ -63,9 +64,21 @@ public class MovieViewModel {
         isLoading.set(true);
         if(searchType.equals(MovieActivity.SEARCH_BY_GENRES)){
             loadMoviesByGenres(id, page);
-        } else {
+        } else if(searchType.equals(MovieActivity.SEARCH_BY_CAST)){
             loadMoviesByCast(id, page);
+        } else {
+            loadMoviesTopTrend(searchType, page);
         }
+    }
+
+    private void loadMoviesTopTrend(String type, int page){
+        isLoading.set(true);
+        Disposable disposable = mMoviesRepository.getMovies(type, BuildConfig.API_KEY, page)
+                .observeOn(mSchedulerProvider.ui())
+                .subscribeOn(mSchedulerProvider.io())
+                .subscribe(response -> handlerResponse(response),
+                        error -> handlerError(error));
+        mCompositeDisposable.add(disposable);
     }
 
     private void loadMoviesByGenres(int genresId, int page){

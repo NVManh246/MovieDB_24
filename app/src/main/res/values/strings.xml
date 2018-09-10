@@ -7,6 +7,7 @@
     <string name="title_time">Time: </string>
     <string name="title_imdb">IMDb: </string>
     <string name="title_release_date">Release date: </string>
+    <string name="title_release">Release: </string>
     <string name="title_detail">Detail</string>
     <string name="title_popular">Popular</string>
     <string name="title_toprated">Top Rated</string>

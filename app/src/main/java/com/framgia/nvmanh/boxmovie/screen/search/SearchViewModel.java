@@ -1,5 +1,6 @@
 package com.framgia.nvmanh.boxmovie.screen.search;
 
+import android.app.Activity;
 import android.content.Context;
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
@@ -30,6 +31,7 @@ public class SearchViewModel {
     public ObservableBoolean isError = new ObservableBoolean();
 
     private Context mContext;
+    private Activity mActivity;
     private MoviesRepository mMoviesRepository;
     private BaseSchedulerProvider mSchedulerProvider;
     private CompositeDisposable mCompositeDisposable;
@@ -37,9 +39,10 @@ public class SearchViewModel {
     private MovieAdapter mMovieAdapter;
     private int mPage;
 
-    public SearchViewModel(Context context, MoviesRepository moviesRepository,
+    public SearchViewModel(Context context, Activity activity, MoviesRepository moviesRepository,
                                 BaseSchedulerProvider schedulerProvider) {
         mContext = context;
+        mActivity = activity;
         mMoviesRepository = moviesRepository;
         mSchedulerProvider = schedulerProvider;
         mCompositeDisposable = new CompositeDisposable();
@@ -77,5 +80,9 @@ public class SearchViewModel {
 
     public void onTextChanged(CharSequence s, int start, int before, int count) {
         searchMovieByTitle(s.toString(), mPage);
+    }
+
+    public void onClickBack(){
+        mActivity.finish();
     }
 }

@@ -19,6 +19,7 @@
             android:layout_height="?attr/actionBarSize"
             android:padding="@dimen/dp_15"
             android:src="@drawable/ic_arrow_back_white_24dp"
+            android:onClick="@{() -> viewModel.onClickBack()}"
             />
 
         <EditText

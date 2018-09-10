@@ -6,13 +6,11 @@ import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
 
 import com.framgia.nvmanh.boxmovie.BuildConfig;
+import com.framgia.nvmanh.boxmovie.data.model.Genres;
 import com.framgia.nvmanh.boxmovie.data.model.Movie;
 import com.framgia.nvmanh.boxmovie.data.model.MovieResutls;
 import com.framgia.nvmanh.boxmovie.data.source.MoviesRepository;
-import com.framgia.nvmanh.boxmovie.screen.nowplaying.NowPlayingActivity;
-import com.framgia.nvmanh.boxmovie.screen.popular.PopularActivity;
-import com.framgia.nvmanh.boxmovie.screen.toprate.TopRatedActivity;
-import com.framgia.nvmanh.boxmovie.screen.upcoming.UpComingActivity;
+import com.framgia.nvmanh.boxmovie.screen.movie.MovieActivity;
 import com.framgia.nvmanh.boxmovie.ultis.schedulers.BaseSchedulerProvider;
 
 import java.util.List;
@@ -67,22 +65,26 @@ public class HomeViewModel {
     }
 
     public void onClickPopular(){
-        Intent intent = PopularActivity.getPopularIntent(mContext);
+        Intent intent = MovieActivity
+                .getMovieIntent(mContext, Genres.Key.POPULAR, 0, Genres.Key.POPULAR);
         mContext.startActivity(intent);
     }
 
     public void onClickTopRated(){
-        Intent intent = TopRatedActivity.getTopRatedIntent(mContext);
+        Intent intent = MovieActivity
+                .getMovieIntent(mContext, Genres.Key.TOP_RATED, 0, Genres.Key.TOP_RATED);
         mContext.startActivity(intent);
     }
 
     public void onClickNowPlaying(){
-        Intent intent = NowPlayingActivity.getNowPlayingIntent(mContext);
+        Intent intent = MovieActivity
+                .getMovieIntent(mContext, Genres.Key.NOW_PLAYING, 0, Genres.Key.NOW_PLAYING);
         mContext.startActivity(intent);
     }
 
     public void onClickUpComing(){
-        Intent intent = UpComingActivity.getUpComingIntent(mContext);
+        Intent intent = MovieActivity
+                .getMovieIntent(mContext, Genres.Key.UPCOMING, 0, Genres.Key.UPCOMING);
         mContext.startActivity(intent);
     }
 

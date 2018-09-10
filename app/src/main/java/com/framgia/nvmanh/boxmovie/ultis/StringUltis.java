@@ -1,6 +1,9 @@
 package com.framgia.nvmanh.boxmovie.ultis;
 
 public final class StringUltis {
+
+    private static final int NUMBER_CHAR_OF_YEAR = 4;
+
     public static String getImageUrl(String s){
         StringBuilder stringBuilder = new StringBuilder(Contants.Server.BASE_IMAGE_URL);
         stringBuilder.append(s);
@@ -29,5 +32,9 @@ public final class StringUltis {
         StringBuilder builder = new StringBuilder(key);
         builder.append(tableName);
         return builder.toString();
+    }
+
+    public static String getYear(String date){
+        return date.substring(0, NUMBER_CHAR_OF_YEAR);
     }
 }

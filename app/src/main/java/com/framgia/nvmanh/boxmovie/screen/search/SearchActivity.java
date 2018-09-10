@@ -37,7 +37,7 @@ public class SearchActivity extends AppCompatActivity {
         MoviesLocalDataSource localDataSource = MoviesLocalDataSource.getInstance(moviesDAO);
         MoviesRepository repository = MoviesRepository.getInstace(remoteDataSource, localDataSource);
 
-        mViewModel = new SearchViewModel(this, repository, schedulerProvider);
+        mViewModel = new SearchViewModel(this, this, repository, schedulerProvider);
         ActivitySearchBinding binding =
                 DataBindingUtil.setContentView(this, R.layout.activity_search);
         binding.setViewModel(mViewModel);
