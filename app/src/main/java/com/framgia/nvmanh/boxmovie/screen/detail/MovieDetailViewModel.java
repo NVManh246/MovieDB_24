@@ -1,15 +1,16 @@
 package com.framgia.nvmanh.boxmovie.screen.detail;
 
 import android.content.Context;
+import android.content.Intent;
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
 
 import com.framgia.nvmanh.boxmovie.BuildConfig;
-import com.framgia.nvmanh.boxmovie.data.model.Movie;
 import com.framgia.nvmanh.boxmovie.data.model.MovieDetail;
 import com.framgia.nvmanh.boxmovie.data.model.Review;
 import com.framgia.nvmanh.boxmovie.data.model.ReviewResults;
 import com.framgia.nvmanh.boxmovie.data.source.MoviesRepository;
+import com.framgia.nvmanh.boxmovie.screen.overview.OverViewActivity;
 import com.framgia.nvmanh.boxmovie.ultis.schedulers.BaseSchedulerProvider;
 
 import java.util.ArrayList;
@@ -20,6 +21,8 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 
 public class MovieDetailViewModel {
+
+    private static final int MAX_SIZE_REVIRES = 10;
 
     public ObservableField<MovieDetail> observableMovieDetail = new ObservableField<>();
     public ObservableField<CastAdapter> observableCastAdapter = new ObservableField<>();
@@ -33,6 +36,7 @@ public class MovieDetailViewModel {
     public ObservableBoolean isLastReview = new ObservableBoolean(false);
 
     private Context mContext;
+    private MovieDetail mMovieDetail;
     private MoviesRepository mMoviesRepository;
     private BaseSchedulerProvider mSchedulerProvider;
     private CompositeDisposable mCompositeDisposable;
@@ -69,15 +73,15 @@ public class MovieDetailViewModel {
                 .subscribe(new Consumer<MovieDetail>() {
                     @Override
                     public void accept(MovieDetail movieDetail) throws Exception {
+                        mMovieDetail = movieDetail;
                         observableMovieDetail.set(movieDetail);
                         observableCastAdapter.set(new CastAdapter(mContext,
                                 movieDetail.getCastResults().getCasts()));
                         observableVideoAdapter.set(new VideoAdapter(mContext,
                                 movieDetail.getVideoResults().getVideos()));
                         List<Review> reviews = movieDetail.getReviewsResults().getReviews();
-                        if(reviews.size() != 0) {
-                            mReviews.addAll(reviews);
-                        } else {
+                        mReviews.addAll(reviews);
+                        if(reviews.size() < MAX_SIZE_REVIRES) {
                             isLastReview.set(true);
                         }
                         isFavorite.set(mMoviesRepository.isFavorite(movieId));
@@ -103,13 +107,14 @@ public class MovieDetailViewModel {
                     @Override
                     public void accept(ReviewResults reviewResults) throws Exception {
                         List<Review> reviews = reviewResults.getReviews();
-                        if (reviews.size() != 0) {
+                        if (reviews.size() < MAX_SIZE_REVIRES) {
                             mPageReview++;
                             int oldSize = mReviews.size();
-                            mReviews.addAll(reviewResults.getReviews());
+                            mReviews.addAll(reviews);
                             mReviewAdapter.notifyItemRangeChanged(oldSize, mReviews.size());
                             isLoadingReview.set(false);
                             isErrorReview.set(false);
+                            isLastReview.set(true);
                         } else {
                             mPageReview--;
                             isLastReview.set(true);
@@ -131,12 +136,17 @@ public class MovieDetailViewModel {
             mMoviesRepository.removeMovie(mMovieId);
             isFavorite.set(false);
         } else {
-            mMoviesRepository.addMovie(observableMovieDetail.get().getMovie());
+            mMoviesRepository.addMovie(mMovieDetail.getMovie());
             isFavorite.set(true);
         }
     }
 
-    public void retry(){
+    public void onClickViewMore(){
+        Intent intent = OverViewActivity.getOverViewIntent(mContext, mMovieDetail);
+        mContext.startActivity(intent);
+    }
+
+    public void retry() {
         isError.set(false);
         loadMovieDetail(mMovieId);
     }

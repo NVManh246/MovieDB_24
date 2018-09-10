@@ -26,5 +26,7 @@
             android:screenOrientation="landscape"/>
         <activity android:name=".screen.movie.MovieActivity"/>
         <activity android:name=".screen.detail.MovieDetailActivity"/>
+        <activity android:name=".screen.overview.OverViewActivity"/>
+        <activity android:name=".screen.search.SearchActivity"/>
     </application>
 </manifest>

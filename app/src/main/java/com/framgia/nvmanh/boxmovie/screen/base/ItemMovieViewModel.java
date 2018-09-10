@@ -1,6 +1,5 @@
 package com.framgia.nvmanh.boxmovie.screen.base;
 
-import android.arch.lifecycle.MutableLiveData;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.ObservableField;
@@ -25,13 +24,15 @@ public class ItemMovieViewModel {
 
     private Context mContext;
     private MoviesRepository mRepository;
+    private MovieAdapter.OnClickFavouriteListener mListener;
 
-    public ItemMovieViewModel(Context context) {
+    public ItemMovieViewModel(Context context, MovieAdapter.OnClickFavouriteListener listener) {
         mContext = context;
         MoviesRemoteDataSource remoteDataSource = MoviesRemoteDataSource.getInstance(ApiFactory.getApi());
         MoviesDAOImpl moviesDAO = new MoviesDAOImpl(DBHelper.getInstance(mContext));
         MoviesLocalDataSource localDataSource = MoviesLocalDataSource.getInstance(moviesDAO);
         mRepository = MoviesRepository.getInstace(remoteDataSource, localDataSource);
+        mListener = listener;
     }
 
     public void setMovie(Movie movie){
@@ -57,10 +58,14 @@ public class ItemMovieViewModel {
             menu.findItem(R.id.menu_favourite)
                     .setTitle(mContext.getString(R.string.title_add_to_wishlist));
         }
+
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
                 if(isFavourite){
+                    if(mListener != null) {
+                        mListener.onClickFavourite(movie.getId());
+                    }
                     mRepository.removeMovie(movie.getId());
                     showMsg(mContext.getString(R.string.msg_remove_to_wishlist));
                 } else {

@@ -17,6 +17,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
 
     private Context mContext;
     private List<Movie> mMovies;
+    private OnClickFavouriteListener mListener;
 
     public MovieAdapter(Context context, List<Movie> movies) {
         mContext = context;
@@ -28,7 +29,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         ItemMovieBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()),
                 R.layout.item_movie, parent, false);
-        return new ViewHolder(mContext, binding);
+        return new ViewHolder(mContext, binding, mListener);
     }
 
     @Override
@@ -41,15 +42,19 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         return mMovies != null ? mMovies.size() : 0;
     }
 
+    public void setListener(OnClickFavouriteListener listener){
+        mListener = listener;
+    }
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         private ItemMovieViewModel mViewModel;
         private ItemMovieBinding mBinding;
 
-        public ViewHolder(Context context, ItemMovieBinding binding) {
+        public ViewHolder(Context context, ItemMovieBinding binding, OnClickFavouriteListener listener) {
             super(binding.getRoot());
             mBinding = binding;
-            mViewModel = new ItemMovieViewModel(context);
+            mViewModel = new ItemMovieViewModel(context, listener);
             mBinding.setViewModel(mViewModel);
         }
 
@@ -57,5 +62,9 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
             mViewModel.setMovie(movie);
             mBinding.executePendingBindings();
         }
+    }
+
+    public interface OnClickFavouriteListener {
+        void onClickFavourite(int movieId);
     }
 }

@@ -26,7 +26,7 @@ public class TrendingMovieAdapter extends PagerAdapter {
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
-        mViewModel = new ItemMovieViewModel(container.getContext());
+        mViewModel = new ItemMovieViewModel(container.getContext(), null);
         ItemTrendingMovieBinding binding = DataBindingUtil.inflate(
                 LayoutInflater.from(container.getContext()),
                 R.layout.item_trending_movie, container,

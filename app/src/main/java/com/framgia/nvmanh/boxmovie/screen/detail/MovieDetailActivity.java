@@ -43,6 +43,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         ActivityDetailMovieBinding binding =
                 DataBindingUtil.setContentView(this, R.layout.activity_detail_movie);
         binding.setViewModel(mViewModel);
+
         setupToolbar(binding.toolbar);
         mViewModel.start(getMovieId());
     }
