@@ -5,23 +5,34 @@
             name="viewModel"
             type="com.framgia.nvmanh.boxmovie.screen.genres.ItemGenresViewModel"/>
     </data>
-    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         >
-        <Button
+        <ImageView
             android:layout_width="0dp"
             android:layout_height="@dimen/dp_90"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             android:scaleType="fitXY"
+            app:imageDrawable="@{viewModel.mGenres.imageResource}"
+            android:onClick="@{() -> viewModel.onClickItemGenres()}"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
             android:text="@{viewModel.mGenres.name}"
             android:textColor="@android:color/white"
             android:textAllCaps="false"
             android:textStyle="bold"
             android:textSize="@dimen/sp_20"
-            android:onClick="@{() -> viewModel.onClickItemGenres()}"
             />
     </android.support.constraint.ConstraintLayout>
 </layout>
