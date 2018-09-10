@@ -4,8 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
+import android.widget.Toast;
 
 import com.framgia.nvmanh.boxmovie.BuildConfig;
+import com.framgia.nvmanh.boxmovie.R;
 import com.framgia.nvmanh.boxmovie.data.model.MovieDetail;
 import com.framgia.nvmanh.boxmovie.data.model.Review;
 import com.framgia.nvmanh.boxmovie.data.model.ReviewResults;
@@ -134,9 +136,11 @@ public class MovieDetailViewModel {
     public void onClickFavourite(){
         if(isFavorite.get()){
             mMoviesRepository.removeMovie(mMovieId);
+            showMsg(mContext.getString(R.string.msg_remove_to_wishlist));
             isFavorite.set(false);
         } else {
             mMoviesRepository.addMovie(mMovieDetail.getMovie());
+            showMsg(mContext.getString(R.string.msg_add_to_wishlist));
             isFavorite.set(true);
         }
     }
@@ -149,5 +153,9 @@ public class MovieDetailViewModel {
     public void retry() {
         isError.set(false);
         loadMovieDetail(mMovieId);
+    }
+
+    private void showMsg(String msg){
+        Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
     }
 }

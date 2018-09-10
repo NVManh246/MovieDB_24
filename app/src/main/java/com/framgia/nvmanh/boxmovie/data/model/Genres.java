@@ -3,6 +3,7 @@ package com.framgia.nvmanh.boxmovie.data.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.framgia.nvmanh.boxmovie.R;
 import com.google.gson.annotations.SerializedName;
 
 public class Genres implements Parcelable{
@@ -10,6 +11,7 @@ public class Genres implements Parcelable{
     private int mId;
     @SerializedName("name")
     private String mName;
+    private int mImageResource;
 
     public Genres(int id, String name) {
         mId = id;
@@ -41,6 +43,14 @@ public class Genres implements Parcelable{
         return mName;
     }
 
+    public int getImageResource() {
+        return mImageResource;
+    }
+
+    public void setImageResource(int imageResource) {
+        mImageResource = imageResource;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -57,5 +67,15 @@ public class Genres implements Parcelable{
         public static final String TOP_RATED = "top_rated";
         public static final String NOW_PLAYING = "now_playing";
         public static final String UPCOMING = "upcoming";
+    }
+
+    public static final class Image {
+        public static final int[] RESOURCE = {R.drawable.action,
+                R.drawable.adventure, R.drawable.animetion, R.drawable.comedy, R.drawable.crime,
+                R.drawable.documentary, R.drawable.drama, R.drawable.family,
+                R.drawable.fantasy, R.drawable.history, R.drawable.horror,
+                R.drawable.music, R.drawable.mystery, R.drawable.romance,
+                R.drawable.science_fiction, R.drawable.tvmovie, R.drawable.thriller,
+                R.drawable.war, R.drawable.western};
     }
 }

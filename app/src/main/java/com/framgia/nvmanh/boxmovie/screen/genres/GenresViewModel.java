@@ -5,9 +5,12 @@ import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
 
 import com.framgia.nvmanh.boxmovie.BuildConfig;
+import com.framgia.nvmanh.boxmovie.data.model.Genres;
 import com.framgia.nvmanh.boxmovie.data.model.GenresResults;
 import com.framgia.nvmanh.boxmovie.data.source.MoviesRepository;
 import com.framgia.nvmanh.boxmovie.ultis.schedulers.BaseSchedulerProvider;
+
+import java.util.List;
 
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
@@ -16,7 +19,7 @@ import io.reactivex.functions.Consumer;
 public class GenresViewModel {
 
     private static final int SPAN_COUT = 2;
-    private static final int SPACING = 10;
+    private static final int SPACING = 20;
 
     public ObservableField<GenresAdapter> observableAdapter = new ObservableField<>();
     public ObservableField<GridSpacingItemDecoration> observableDecoration = new ObservableField<>();
@@ -49,7 +52,7 @@ public class GenresViewModel {
                 .subscribe(new Consumer<GenresResults>() {
                     @Override
                     public void accept(GenresResults genresResults) throws Exception {
-                        observableAdapter.set(new GenresAdapter(mContext, genresResults.getGenres()));
+                        observableAdapter.set(new GenresAdapter(mContext, getGenres(genresResults)));
                         isLoading.set(false);
                     }
                 }, new Consumer<Throwable>() {
@@ -60,5 +63,13 @@ public class GenresViewModel {
                     }
                 });
         mCompositeDisposable.add(disposable);
+    }
+
+    private List<Genres> getGenres(GenresResults resutls){
+        List<Genres> genres = resutls.getGenres();
+        for(int i = 0; i < genres.size(); i++){
+            genres.get(i).setImageResource(Genres.Image.RESOURCE[i]);
+        }
+        return genres;
     }
 }

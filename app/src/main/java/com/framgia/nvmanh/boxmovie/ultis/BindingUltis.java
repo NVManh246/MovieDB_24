@@ -22,6 +22,14 @@ public class BindingUltis {
                 .into(imageView);
     }
 
+
+    @BindingAdapter({"imageDrawable"})
+    public static void loadImg(ImageView imageView, int resource){
+        Glide.with(imageView.getContext())
+                .load(resource)
+                .into(imageView);
+    }
+
     @BindingAdapter({"imageUrlYoutube"})
     public static void loadImgYoutube(ImageView imageView, String key){
         Glide.with(imageView.getContext())

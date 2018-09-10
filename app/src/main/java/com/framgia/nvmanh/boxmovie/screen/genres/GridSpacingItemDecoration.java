@@ -28,6 +28,7 @@ public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
             if (position < mSpanCount) {
                 outRect.top = mSpacing;
             }
+            outRect.bottom = mSpacing;
         } else {
             outRect.left = column * mSpacing / mSpanCount;
             outRect.right = mSpacing - (column + NUMBER_ONE) * mSpacing / mSpanCount;
