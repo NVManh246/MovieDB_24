@@ -21,12 +21,13 @@ import com.framgia.nvmanh.boxmovie.ultis.schedulers.SchedulerProvider;
 
 public class MovieActivity extends AppCompatActivity{
 
-    public static final String SEARCH_TYPE = "search";
-    public static final String ID = "id";
-    public static final String NAME = "name";
+    public static final String BUNDLE_SEARCH_TYPE = "search";
+    public static final String BUNDLE_ID = "id";
+    public static final String BUNDLE_NAME = "name";
     public static final String SEARCH_BY_CAST = "cast";
     public static final String SEARCH_BY_GENRES = "genres";
-    public static final String DATA = "data";
+    public static final String SEARCH_BY_COMPANY = "company";
+    public static final String EXTRA_DATA = "data";
 
     private MovieViewModel mViewModel;
     private String mSearchType;
@@ -36,10 +37,10 @@ public class MovieActivity extends AppCompatActivity{
     public static Intent getMovieIntent(Context context, String searchType, int id, String name){
         Intent intent = new Intent(context, MovieActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putString(SEARCH_TYPE, searchType);
-        bundle.putInt(ID, id);
-        bundle.putString(NAME, name);
-        intent.putExtra(DATA, bundle);
+        bundle.putString(BUNDLE_SEARCH_TYPE, searchType);
+        bundle.putInt(BUNDLE_ID, id);
+        bundle.putString(BUNDLE_NAME, name);
+        intent.putExtra(EXTRA_DATA, bundle);
         return intent;
     }
 
@@ -73,9 +74,9 @@ public class MovieActivity extends AppCompatActivity{
     }
 
     private void getSearchType(){
-        Bundle bundle = getIntent().getBundleExtra(DATA);
-        mSearchType = bundle.getString(SEARCH_TYPE);
-        mKey = bundle.getInt(ID);
-        mName = bundle.getString(NAME);
+        Bundle bundle = getIntent().getBundleExtra(EXTRA_DATA);
+        mSearchType = bundle.getString(BUNDLE_SEARCH_TYPE);
+        mKey = bundle.getInt(BUNDLE_ID);
+        mName = bundle.getString(BUNDLE_NAME);
     }
 }

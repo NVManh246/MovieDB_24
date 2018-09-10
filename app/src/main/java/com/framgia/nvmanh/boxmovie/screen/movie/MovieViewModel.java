@@ -62,12 +62,19 @@ public class MovieViewModel {
 
     private void loadMovie(String searchType, int id, int page){
         isLoading.set(true);
-        if(searchType.equals(MovieActivity.SEARCH_BY_GENRES)){
-            loadMoviesByGenres(id, page);
-        } else if(searchType.equals(MovieActivity.SEARCH_BY_CAST)){
-            loadMoviesByCast(id, page);
-        } else {
-            loadMoviesTopTrend(searchType, page);
+        switch (searchType){
+            case MovieActivity.SEARCH_BY_GENRES:
+                loadMoviesByGenres(id, page);
+                break;
+            case MovieActivity.SEARCH_BY_CAST:
+                loadMoviesByCast(id, page);
+                break;
+            case MovieActivity.SEARCH_BY_COMPANY:
+                loadMoviesByCompany(id, page);
+                break;
+            default:
+                loadMoviesTopTrend(searchType, page);
+                break;
         }
     }
 
@@ -94,6 +101,16 @@ public class MovieViewModel {
     private void loadMoviesByCast(int castId, int page){
         isLoading.set(true);
         Disposable disposable = mMoviesRepository.getMoviesByCast(BuildConfig.API_KEY, castId, page)
+                .observeOn(mSchedulerProvider.ui())
+                .subscribeOn(mSchedulerProvider.io())
+                .subscribe(response -> handlerResponse(response),
+                        error -> handlerError(error));
+        mCompositeDisposable.add(disposable);
+    }
+
+    private void loadMoviesByCompany(int companyId, int page){
+        isLoading.set(true);
+        Disposable disposable = mMoviesRepository.getMoviesByCompany(BuildConfig.API_KEY, companyId, page)
                 .observeOn(mSchedulerProvider.ui())
                 .subscribeOn(mSchedulerProvider.io())
                 .subscribe(response -> handlerResponse(response),

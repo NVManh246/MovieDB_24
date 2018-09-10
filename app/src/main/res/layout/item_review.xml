@@ -60,7 +60,7 @@
             android:layout_width="0dp"
             android:layout_height="@dimen/dp_1"
             android:layout_marginTop="@dimen/dp_15"
-            android:background="@color/color_mine_shaft"
+            android:background="@color/color_gray"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/text_avatar"
             app:layout_constraintTop_toBottomOf="@+id/text_content" />

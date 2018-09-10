@@ -21,7 +21,7 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 
 public class SearchViewModel {
-    private static final int SPACING = 10;
+    private static final int SPACING = 20;
     private static final int NUMBER_ONE = 1;
 
     public ObservableField<MovieAdapter> observableMovieAdapter = new ObservableField<>();

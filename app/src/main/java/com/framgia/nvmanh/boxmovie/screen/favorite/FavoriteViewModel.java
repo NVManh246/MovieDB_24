@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FavoriteViewModel implements MovieAdapter.OnClickFavouriteListener{
-    private static final int SPACING = 10;
+    private static final int SPACING = 20;
     public ObservableField<MovieAdapter> observableMovieAdapter = new ObservableField<>();
     public ObservableField<RecyclerView.ItemDecoration>
             observableItemDecoration = new ObservableField<>();
