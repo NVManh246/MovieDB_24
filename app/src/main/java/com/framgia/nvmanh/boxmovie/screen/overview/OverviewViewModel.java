@@ -24,7 +24,7 @@ public class OverviewViewModel {
     public void start(MovieDetail movieDetail){
         observableMovie.set(movieDetail);
         observableGenresAdapter.set(new GenresAdapter(mContext, movieDetail.getGenres()));
-        observableCompanyAdapter.set(new CompanyAdapter(movieDetail.getCompanies()));
+        observableCompanyAdapter.set(new CompanyAdapter(mContext, movieDetail.getCompanies()));
     }
 
     public RecyclerView.ItemDecoration getItemDecoration(){

@@ -45,6 +45,12 @@ public interface BoxMovieApi {
             @Query("with_cast") int castId,
             @Query("page") int page);
 
+    @GET("discover/movie")
+    Observable<MovieResutls> getMoviesByCompany(
+            @Query("api_key") String apiKey,
+            @Query("with_companies") int companyId,
+            @Query("page") int page);
+
     @GET("search/movie")
     Observable<MovieResutls> searchMoviesByTitle(
             @Query("api_key") String apiKey,

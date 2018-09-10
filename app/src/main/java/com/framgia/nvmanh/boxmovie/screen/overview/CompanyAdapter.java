@@ -1,5 +1,6 @@
 package com.framgia.nvmanh.boxmovie.screen.overview;
 
+import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -13,9 +14,12 @@ import com.framgia.nvmanh.boxmovie.databinding.ItemCompanyBinding;
 import java.util.List;
 
 public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.ViewHolder> {
+
+    private Context mContext;
     private List<Company> mCompanies;
 
-    public CompanyAdapter(List<Company> companies) {
+    public CompanyAdapter(Context context, List<Company> companies) {
+        mContext = context;
         mCompanies = companies;
     }
 
@@ -26,7 +30,7 @@ public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.ViewHold
                 LayoutInflater.from(parent.getContext()),
                 R.layout.item_company, parent,
                 false);
-        return new ViewHolder(binding);
+        return new ViewHolder(binding, mContext);
     }
 
     @Override
@@ -41,9 +45,9 @@ public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.ViewHold
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private ItemCompanyViewModel mViewModel;
-        public ViewHolder(ItemCompanyBinding binding) {
+        public ViewHolder(ItemCompanyBinding binding, Context context) {
             super(binding.getRoot());
-            mViewModel = new ItemCompanyViewModel();
+            mViewModel = new ItemCompanyViewModel(context);
             binding.setViewModel(mViewModel);
         }
 
