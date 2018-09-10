@@ -39,6 +39,8 @@ public class MovieDetail implements Parcelable{
     private VideoResults mVideoResults;
     @SerializedName("reviews")
     private ReviewResults mReviewsResults;
+    @SerializedName("production_companies")
+    private List<Company> mCompanies;
 
     public MovieDetail() {
     }
@@ -57,6 +59,8 @@ public class MovieDetail implements Parcelable{
         mStatus = in.readString();
         mGenres = new ArrayList<>();
         in.readList(mGenres, MovieDetail.class.getClassLoader());
+        mCompanies = new ArrayList<>();
+        in.readList(mCompanies, MovieDetail.class.getClassLoader());
     }
 
     public static final Creator<MovieDetail> CREATOR = new Creator<MovieDetail>() {
@@ -191,6 +195,10 @@ public class MovieDetail implements Parcelable{
         return mReviewsResults;
     }
 
+    public List<Company> getCompanies(){
+        return mCompanies;
+    }
+
     public Movie getMovie() {
         Movie movie = new Movie();
         movie.setId(mId);
@@ -222,5 +230,6 @@ public class MovieDetail implements Parcelable{
         parcel.writeInt(mRuntime);
         parcel.writeString(mStatus);
         parcel.writeList(mGenres);
+        parcel.writeList(mCompanies);
     }
 }
