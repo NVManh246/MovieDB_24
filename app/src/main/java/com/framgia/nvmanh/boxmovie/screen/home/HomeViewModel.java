@@ -85,4 +85,9 @@ public class HomeViewModel {
         Intent intent = UpComingActivity.getUpComingIntent(mContext);
         mContext.startActivity(intent);
     }
+
+    public void retry(){
+        isError.set(false);
+        loadTrendingMovies();
+    }
 }

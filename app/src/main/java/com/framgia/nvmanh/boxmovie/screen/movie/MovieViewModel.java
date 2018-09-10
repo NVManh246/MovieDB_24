@@ -3,12 +3,14 @@ package com.framgia.nvmanh.boxmovie.screen.movie;
 import android.content.Context;
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
+import android.support.v7.widget.RecyclerView;
 
 import com.framgia.nvmanh.boxmovie.BuildConfig;
 import com.framgia.nvmanh.boxmovie.data.model.Movie;
 import com.framgia.nvmanh.boxmovie.data.model.MovieResutls;
 import com.framgia.nvmanh.boxmovie.data.source.MoviesRepository;
 import com.framgia.nvmanh.boxmovie.screen.base.MovieAdapter;
+import com.framgia.nvmanh.boxmovie.screen.search.VerticalSpaceItemDecoration;
 import com.framgia.nvmanh.boxmovie.ultis.schedulers.BaseSchedulerProvider;
 
 import java.util.ArrayList;
@@ -18,7 +20,11 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 
 public class MovieViewModel {
+    private static final int SPACING = 20;
+
     public ObservableField<MovieAdapter> obervableMovieAdapter = new ObservableField<>();
+    public ObservableField<RecyclerView.ItemDecoration>
+            observableItemDecoration = new ObservableField<>();
     public ObservableField<String> obervableTitle = new ObservableField<>();
     public ObservableBoolean isLoading = new ObservableBoolean();
     public ObservableBoolean isError = new ObservableBoolean();
@@ -32,6 +38,7 @@ public class MovieViewModel {
     private String mSearchType;
     private int mId;
     private int mPage = 1;
+    private int mPageCurrent = 1;
 
     public MovieViewModel(Context context, MoviesRepository moviesRepository,
                            BaseSchedulerProvider schedulerProvider) {
@@ -42,6 +49,7 @@ public class MovieViewModel {
         mMovies = new ArrayList<>();
         mMovieAdapter = new MovieAdapter(mContext, mMovies);
         obervableMovieAdapter.set(mMovieAdapter);
+        observableItemDecoration.set(new VerticalSpaceItemDecoration(SPACING));
     }
 
     public void start(String searchType, int id, String name){
@@ -94,5 +102,11 @@ public class MovieViewModel {
 
     public void onLoadMore(){
         loadMovie(mSearchType, mId, ++mPage);
+        mPageCurrent = mPage;
+    }
+
+    public void retry(){
+        isError.set(false);
+        loadMovie(mSearchType, mId, mPageCurrent);
     }
 }

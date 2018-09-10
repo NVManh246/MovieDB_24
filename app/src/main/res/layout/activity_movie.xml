@@ -8,7 +8,9 @@
     </data>
     <android.support.constraint.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/color_cod_gray"
+        >
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
@@ -22,9 +24,19 @@
             app:titleTextColor="@android:color/white"
             />
 
+        <View
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            android:background="@color/color_gray"
+            />
+
         <android.support.v7.widget.RecyclerView
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginTop="@dimen/dp_1"
             app:layout_constraintTop_toBottomOf="@+id/toolbar"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -32,16 +44,32 @@
             app:layoutManager="android.support.v7.widget.LinearLayoutManager"
             app:setAdapter="@{viewModel.obervableMovieAdapter}"
             app:setOnScroll="@{() -> viewModel.onLoadMore()}"
+            app:addLinearDecoration="@{viewModel.observableItemDecoration}"
+            android:visibility="@{viewModel.isError ? View.GONE : View.VISIBLE}"
             />
 
         <ProgressBar
             android:id="@+id/progress"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.GONE}"
+            />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/action_retry"
+            android:textColor="@android:color/white"
+            android:background="@android:color/holo_red_light"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:visibility="@{viewModel.isError ? View.VISIBLE : View.GONE}"
+            android:onClick="@{() -> viewModel.retry()}"
             />
     </android.support.constraint.ConstraintLayout>
 </layout>

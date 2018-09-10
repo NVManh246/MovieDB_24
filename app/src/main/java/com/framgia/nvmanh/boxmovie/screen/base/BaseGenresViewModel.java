@@ -3,11 +3,13 @@ package com.framgia.nvmanh.boxmovie.screen.base;
 import android.content.Context;
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
+import android.support.v7.widget.RecyclerView;
 
 import com.framgia.nvmanh.boxmovie.BuildConfig;
 import com.framgia.nvmanh.boxmovie.data.model.Movie;
 import com.framgia.nvmanh.boxmovie.data.model.MovieResutls;
 import com.framgia.nvmanh.boxmovie.data.source.MoviesRepository;
+import com.framgia.nvmanh.boxmovie.screen.search.VerticalSpaceItemDecoration;
 import com.framgia.nvmanh.boxmovie.ultis.schedulers.BaseSchedulerProvider;
 
 import java.util.ArrayList;
@@ -18,8 +20,12 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 
 public class BaseGenresViewModel {
+    private static final int SPACING = 20;
+
     public ObservableField<MovieAdapter> observableMovieAdapter = new ObservableField<>();
     public ObservableField<String> observableGenres = new ObservableField<>();
+    public ObservableField<RecyclerView.ItemDecoration>
+            observableItemDecoration = new ObservableField<>();
     public ObservableBoolean isError = new ObservableBoolean(false);
     public ObservableBoolean isLoading = new ObservableBoolean(true);
 
@@ -30,6 +36,7 @@ public class BaseGenresViewModel {
     private MovieAdapter mMovieAdapter;
     private List<Movie> mMovies;
     private int mPage = 1;
+    private int mPageCurrent = 1;
 
     public BaseGenresViewModel(Context context, MoviesRepository moviesRepository,
                          BaseSchedulerProvider schedulerProvider) {
@@ -40,6 +47,7 @@ public class BaseGenresViewModel {
         mMovies = new ArrayList<>();
         mMovieAdapter = new MovieAdapter(mContext, mMovies);
         observableMovieAdapter.set(mMovieAdapter);
+        observableItemDecoration.set(new VerticalSpaceItemDecoration(SPACING));
     }
 
     public void start(){
@@ -77,5 +85,11 @@ public class BaseGenresViewModel {
 
     public void onLoadMore(){
         loadMovies(++mPage);
+        mPageCurrent = mPage;
+    }
+
+    public void retry(){
+        isError.set(false);
+        loadMovies(mPageCurrent);
     }
 }
