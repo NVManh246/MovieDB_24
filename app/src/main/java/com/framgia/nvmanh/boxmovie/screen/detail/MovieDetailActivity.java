@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 
 import com.framgia.nvmanh.boxmovie.R;
@@ -24,6 +25,7 @@ public class MovieDetailActivity extends AppCompatActivity {
     public static final String EXTRA_MOVIE_ID = "movieId";
 
     private MovieDetailViewModel mViewModel;
+    private ActivityDetailMovieBinding mBinding;
 
     public static Intent getMovieDetailIntent(Context context, int movieId){
         Intent intent = new Intent(context, MovieDetailActivity.class);
@@ -40,12 +42,24 @@ public class MovieDetailActivity extends AppCompatActivity {
         MoviesLocalDataSource localDataSource = MoviesLocalDataSource.getInstance(moviesDAO);
         MoviesRepository repository = MoviesRepository.getInstace(remoteDataSource, localDataSource);
         mViewModel = new MovieDetailViewModel(this, repository, schedulerProvider);
-        ActivityDetailMovieBinding binding =
-                DataBindingUtil.setContentView(this, R.layout.activity_detail_movie);
-        binding.setViewModel(mViewModel);
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_detail_movie);
+        mBinding.setViewModel(mViewModel);
+        setupToolbar(mBinding.toolbar);
+        int moviedId = getMovieId(getIntent());
+        if(moviedId != 0){
+            mViewModel.start(moviedId);
+        }
+    }
 
-        setupToolbar(binding.toolbar);
-        mViewModel.start(getMovieId());
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        int moviedId = getMovieId(intent);
+        if(moviedId != 0){
+            mViewModel.stop();
+            mViewModel.start(moviedId);
+            mBinding.scrollView.scrollTo (0, 0);
+        }
     }
 
     private void setupToolbar(Toolbar toolbar){
@@ -59,8 +73,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         });
     }
 
-    private int getMovieId(){
-        Intent intent = getIntent();
+    private int getMovieId(Intent intent){
         return intent.getIntExtra(EXTRA_MOVIE_ID, 0);
     }
 }

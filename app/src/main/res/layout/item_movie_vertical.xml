@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="viewModel"
+            type="com.framgia.nvmanh.boxmovie.screen.base.ItemMovieViewModel"/>
+    </data>
+    <android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dp_5"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:onClick="@{() -> viewModel.onClickItemMovie()}"
+        >
+
+        <ImageView
+            android:id="@+id/image_movie"
+            android:layout_width="@dimen/dp_90"
+            android:layout_height="@dimen/dp_120"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:scaleType="centerCrop"
+            app:imageUrl="@{viewModel.observableMovie.poster}"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{viewModel.observableMovie.title}"
+            android:textSize="@dimen/sp_12"
+            android:textColor="@android:color/white"
+            android:maxLines="1"
+            android:ellipsize="end"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/image_movie" />
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

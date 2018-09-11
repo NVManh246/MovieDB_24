@@ -13,7 +13,7 @@ public class Movie {
     private String mTitle;
     @SerializedName("poster_path")
     private String mPoster;
-    @SerializedName("backdrop")
+    @SerializedName("backdrop_path")
     private String mBackdrop;
     @SerializedName("genre_ids")
     private List<Integer> mGenreIds;

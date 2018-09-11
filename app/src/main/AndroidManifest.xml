@@ -18,14 +18,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".screen.popular.PopularActivity"/>
-        <activity android:name=".screen.toprate.TopRatedActivity"/>
-        <activity android:name=".screen.nowplaying.NowPlayingActivity"/>
-        <activity android:name=".screen.upcoming.UpComingActivity"/>
         <activity android:name=".screen.video.VideoActivity"
             android:screenOrientation="landscape"/>
         <activity android:name=".screen.movie.MovieActivity"/>
-        <activity android:name=".screen.detail.MovieDetailActivity"/>
+        <activity android:name=".screen.detail.MovieDetailActivity"
+            android:launchMode="singleTop"/>
         <activity android:name=".screen.overview.OverViewActivity"/>
         <activity android:name=".screen.search.SearchActivity"/>
     </application>

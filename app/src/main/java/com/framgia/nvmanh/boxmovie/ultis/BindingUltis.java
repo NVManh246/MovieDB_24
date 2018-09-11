@@ -8,7 +8,9 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.framgia.nvmanh.boxmovie.BuildConfig;
+import com.framgia.nvmanh.boxmovie.R;
 import com.framgia.nvmanh.boxmovie.screen.base.EndLessRecyclerOnScrollListener;
 import com.framgia.nvmanh.boxmovie.screen.genres.GridSpacingItemDecoration;
 import com.google.android.youtube.player.YouTubePlayer;
@@ -17,8 +19,12 @@ import com.google.android.youtube.player.YouTubePlayerView;
 public class BindingUltis {
     @BindingAdapter({"imageUrl"})
     public static void loadImg(ImageView imageView, String url){
+        RequestOptions options = new RequestOptions();
+        options.placeholder(R.drawable.background_placeholder);
+        options.error(R.drawable.ic_error_outline_white_24dp);
         Glide.with(imageView.getContext())
                 .load(StringUltis.getImageUrl(url))
+                .apply(options)
                 .into(imageView);
     }
 

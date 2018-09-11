@@ -20,6 +20,7 @@
             android:padding="@dimen/dp_15"
             android:src="@drawable/ic_arrow_back_white_24dp"
             android:onClick="@{() -> viewModel.onClickBack()}"
+            android:background="@color/color_tundora"
             />
 
         <EditText
@@ -27,10 +28,12 @@
             android:layout_width="0dp"
             android:layout_height="?attr/actionBarSize"
             app:layout_constraintLeft_toRightOf="@+id/image_back"
-            app:layout_constraintRight_toLeftOf="@+id/progress"
+            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:textColor="@android:color/white"
             android:inputType="text"
+            android:hint="@string/title_enter_movie"
+            android:textColorHint="@color/color_gray_light"
             android:maxLines="1"
             android:background="@drawable/background_edit_search"
             android:textCursorDrawable="@drawable/custome_cursor"
@@ -64,7 +67,6 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_search"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginTop="@dimen/dp_10"
             app:layoutManager="android.support.v7.widget.LinearLayoutManager"
             app:setAdapter="@{viewModel.observableMovieAdapter}"
             app:addLinearDecoration="@{viewModel.observableItemDecoration}"

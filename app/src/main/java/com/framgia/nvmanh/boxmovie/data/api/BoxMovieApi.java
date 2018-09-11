@@ -20,7 +20,7 @@ public interface BoxMovieApi {
     @GET("trending/movie/week")
     Observable<MovieResutls> getTrendingMovies(@Query("api_key") String apiKey);
 
-    @GET("movie/{id}?append_to_response=casts%2Cvideos%2Creviews")
+    @GET("movie/{id}?append_to_response=casts%2Cvideos%2Creviews%2Crecommendations")
     Observable<MovieDetail> getMovieDetail(
             @Path("id") int id,
             @Query("api_key") String apiKey);

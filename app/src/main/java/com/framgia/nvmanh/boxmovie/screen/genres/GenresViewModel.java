@@ -72,4 +72,9 @@ public class GenresViewModel {
         }
         return genres;
     }
+
+    public void retry(){
+        isError.set(false);
+        loadGenres();
+    }
 }

@@ -16,6 +16,7 @@
     <string name="title_overview">Overview</string>
     <string name="title_view_more">More</string>
     <string name="title_trailer">Trailer</string>
+    <string name="title_recommandations">Recommandations</string>
     <string name="title_casts">Casts</string>
     <string name="title_reviews">Reviews</string>
     <string name="title_search">Search</string>
@@ -28,6 +29,7 @@
     <string name="title_add_to_wishlist">Add to wishlist</string>
     <string name="title_remove_to_wishlist">Remove to wishlist</string>
     <string name="title_production_companies">Production Companies</string>
+    <string name="title_enter_movie">Enter movie title</string>
     <string name="action_retry">Retry</string>
     <string name="msg_add_to_wishlist">Adding to wishlist...</string>
     <string name="msg_remove_to_wishlist">Removing to wishlist...</string>

@@ -41,6 +41,8 @@ public class MovieDetail implements Parcelable{
     private ReviewResults mReviewsResults;
     @SerializedName("production_companies")
     private List<Company> mCompanies;
+    @SerializedName("recommendations")
+    private MovieResutls mRecommandations;
 
     public MovieDetail() {
     }
@@ -197,6 +199,10 @@ public class MovieDetail implements Parcelable{
 
     public List<Company> getCompanies(){
         return mCompanies;
+    }
+
+    public MovieResutls getRecommandations() {
+        return mRecommandations;
     }
 
     public Movie getMovie() {

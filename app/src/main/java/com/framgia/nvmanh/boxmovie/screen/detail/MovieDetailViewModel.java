@@ -25,11 +25,13 @@ import io.reactivex.functions.Consumer;
 public class MovieDetailViewModel {
 
     private static final int MAX_SIZE_REVIRES = 10;
+    private static final int PAGE_REVIRES = 2;
 
     public ObservableField<MovieDetail> observableMovieDetail = new ObservableField<>();
     public ObservableField<CastAdapter> observableCastAdapter = new ObservableField<>();
     public ObservableField<VideoAdapter> observableVideoAdapter = new ObservableField<>();
     public ObservableField<ReviewAdapter> observableReviewAdapter = new ObservableField<>();
+    public ObservableField<RecommandationAdapter> observableRecommandAdapter = new ObservableField<>();
     public ObservableBoolean isLoading = new ObservableBoolean(false);
     public ObservableBoolean isLoadingReview = new ObservableBoolean(false);
     public ObservableBoolean isFavorite = new ObservableBoolean(false);
@@ -45,7 +47,7 @@ public class MovieDetailViewModel {
     private List<Review> mReviews;
     private ReviewAdapter mReviewAdapter;
     private int mMovieId;
-    private int mPageReview = 2;
+    private int mPageReview = PAGE_REVIRES;
 
     public MovieDetailViewModel(Context context, MoviesRepository moviesRepository,
                                 BaseSchedulerProvider schedulerProvider) {
@@ -67,6 +69,16 @@ public class MovieDetailViewModel {
         }
     }
 
+    public void stop(){
+        mReviews.clear();
+        mPageReview = PAGE_REVIRES;
+        isLoading.set(false);
+        isLoadingReview.set(false);
+        isError.set(false);
+        isErrorReview.set(false);
+        isLastReview.set(false);
+    }
+
     private void loadMovieDetail(int movieId){
         isLoading.set(true);
         Disposable disposable = mMoviesRepository.getMovieDetail(BuildConfig.API_KEY, movieId)
@@ -81,6 +93,8 @@ public class MovieDetailViewModel {
                                 movieDetail.getCastResults().getCasts()));
                         observableVideoAdapter.set(new VideoAdapter(mContext,
                                 movieDetail.getVideoResults().getVideos()));
+                        observableRecommandAdapter.set(new RecommandationAdapter(mContext,
+                                movieDetail.getRecommandations().getMovies()));
                         List<Review> reviews = movieDetail.getReviewsResults().getReviews();
                         mReviews.addAll(reviews);
                         if(reviews.size() < MAX_SIZE_REVIRES) {
